@@ -5,6 +5,7 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +27,7 @@ export const OnboardingContextProvider = ({
 }: PropsWithChildren<{}>) => {
   const navigate = useNavigate();
   const [role, setRole] = useState<Roles>();
-  const { handleUserFirstAccess } = useAuthenticationContext();
+  const { user, handleUserFirstAccess } = useAuthenticationContext();
 
   const handleSelectRole = useCallback((role: Roles) => {
     setRole(role);
@@ -38,6 +39,12 @@ export const OnboardingContextProvider = ({
       navigate("/");
     }
   }, [handleUserFirstAccess, navigate, role]);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
 
   return (
     <OnboardingContext.Provider

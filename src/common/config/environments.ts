@@ -7,5 +7,5 @@ const getAndAssertEnv = (env: string) => {
 };
 
 export const environments = {
-  BACKEND_URL: getAndAssertEnv("BACKEND_URL"),
+  REACT_APP_BACKEND_URL: getAndAssertEnv("REACT_APP_BACKEND_URL"),
 };

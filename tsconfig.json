@@ -21,7 +21,9 @@
       "@pages": ["src/pages/index"],
       "@routes": ["src/common/routes/index"],
       "@enums": ["src/common/enums/index"],
-      "@services/*": ["src/services/*"]
+      "@services/*": ["src/services/*"],
+      "@config": ["src/common/config/index"],
+      "@constants": ["src/common/constants/index"]
     }
   },
   "include": ["src"]

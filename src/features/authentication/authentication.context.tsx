@@ -1,5 +1,6 @@
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Center, Spinner } from "@chakra-ui/react";
+import { ACCESS_TOKEN_KEY } from "@constants";
 import { Roles } from "@enums";
 import { IUser, UserService } from "@services/user";
 import {
@@ -30,6 +31,10 @@ const initialContext: AuthenticationContextProps = {
 
 const authenticationContext = createContext(initialContext);
 
+const setToken = (token: string) => {
+  localStorage.setItem(ACCESS_TOKEN_KEY, token);
+};
+
 export const AuthenticationProvider = ({ children }: PropsWithChildren<{}>) => {
   const [context, setContext] = useState(initialContext);
   const { user: cognitoUser, signOut } = useAuthenticator((context) => [
@@ -39,14 +44,23 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren<{}>) => {
   const location = useLocation();
 
   const checkCognitoAuthentication = useCallback(() => {
-    if (cognitoUser === null) {
-      navigate(`/login?redirect=${location.pathname}`);
+    if (!cognitoUser) {
+      if (location.pathname !== "/login") {
+        navigate(`/login?redirect=${location.pathname}`);
+      }
+    } else {
+      const session = cognitoUser.getSignInUserSession();
+      const token = session?.getIdToken().getJwtToken();
+
+      if (token) {
+        setToken(token);
+      }
     }
   }, [cognitoUser, location.pathname, navigate]);
 
   const fetchUser = useCallback(async () => {
     if (cognitoUser && !context.user) {
-      const user = await UserService.getUser(cognitoUser.username || "");
+      const user = await UserService.getUser(cognitoUser.attributes?.sub || "");
 
       if (!user) {
         if (location.pathname !== "/onboarding") {

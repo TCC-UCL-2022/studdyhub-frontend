@@ -15,7 +15,6 @@ const LoginComponent = (): JSX.Element => {
 
   return (
     <>
-      <title>Login | Studdyhub</title>
       <div>Login</div>
     </>
   );
@@ -41,6 +40,7 @@ export const Login = withAuthenticator(LoginComponent, {
       name: {
         label: "Nome",
         placeholder: "Nome",
+        isRequired: true,
       },
     },
     resetPassword: {
