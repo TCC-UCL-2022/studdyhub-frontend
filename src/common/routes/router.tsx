@@ -1,4 +1,4 @@
-import { WithAuthentication } from "@features/authentication";
+import { AuthenticationProvider } from "@features/authentication";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { authenticatedRoutes, routes } from "./routes";
 
@@ -10,7 +10,9 @@ export const Router = (): JSX.Element => (
           key={path}
           path={path}
           element={
-            <WithAuthentication children={component}></WithAuthentication>
+            <AuthenticationProvider
+              children={component}
+            ></AuthenticationProvider>
           }
           index={index}
         />
