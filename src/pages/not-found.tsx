@@ -5,7 +5,7 @@ export const NotFoundPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <Center w="100%" h="100vh" bgColor="Background">
+    <Center w="100%" h="100vh">
       <VStack justify="center">
         <Heading size="3xl">404</Heading>
         <Heading size="2xl">Página não encontrada!</Heading>

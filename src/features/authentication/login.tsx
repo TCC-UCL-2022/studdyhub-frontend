@@ -2,7 +2,7 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const AuthenticatorComponent = (): JSX.Element => {
+const LoginComponent = (): JSX.Element => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
@@ -21,7 +21,7 @@ const AuthenticatorComponent = (): JSX.Element => {
   );
 };
 
-export const Authenticator = withAuthenticator(AuthenticatorComponent, {
+export const Login = withAuthenticator(LoginComponent, {
   formFields: {
     signIn: {
       password: {
@@ -38,6 +38,10 @@ export const Authenticator = withAuthenticator(AuthenticatorComponent, {
         label: "Confirmar Senha",
         placeholder: "Confirmar Senha",
       },
+      name: {
+        label: "Nome",
+        placeholder: "Nome",
+      },
     },
     resetPassword: {
       username: {
@@ -45,4 +49,5 @@ export const Authenticator = withAuthenticator(AuthenticatorComponent, {
       },
     },
   },
+  signUpAttributes: ["name"],
 });
