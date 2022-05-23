@@ -1,6 +1,7 @@
 import { Flex, useColorModeValue } from "@chakra-ui/react";
 import { useTitle } from "@features/ui/hooks";
-import { AppLayoutHeader } from "./app-layout-header";
+import { Footer } from "./footer";
+import { Header } from "./header";
 
 type AppLayoutProps = {
   title: string;
@@ -19,7 +20,7 @@ export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
       bgColor={bgColor}
       transition="0.15s all"
     >
-      <AppLayoutHeader />
+      <Header />
       <Flex
         w="100%"
         my="2"
@@ -31,6 +32,7 @@ export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
       >
         {children}
       </Flex>
+      <Footer />
     </Flex>
   );
 };

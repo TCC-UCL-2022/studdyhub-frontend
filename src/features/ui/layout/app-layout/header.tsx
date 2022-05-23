@@ -1,9 +1,7 @@
-import { logos } from "@assets";
 import {
   Flex,
   HStack,
   IconButton,
-  Image,
   Tooltip,
   useBreakpointValue,
   useColorMode,
@@ -12,8 +10,9 @@ import {
 import { ProfileMenu } from "@features/account";
 import { RiMoonFill, RiSunFill, RiVideoAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { Logo } from "./logo";
 
-export const AppLayoutHeader = (): JSX.Element => {
+export const Header = (): JSX.Element => {
   const { toggleColorMode } = useColorMode();
 
   return (
@@ -25,13 +24,7 @@ export const AppLayoutHeader = (): JSX.Element => {
       transition="0.15s all"
     >
       <Flex w="100%" maxW={1600} mx="auto" px={["2", "4", "6"]} align="center">
-        <Link to="/">
-          <Image
-            w="40"
-            transition="all ease 0.2s"
-            src={useColorModeValue(logos.dark, logos.light)}
-          />
-        </Link>
+        <Logo />
 
         <HStack spacing={["2", "4"]} ml="auto">
           <Tooltip label="Trocar tema">
@@ -46,7 +39,7 @@ export const AppLayoutHeader = (): JSX.Element => {
             <IconButton
               as={Link}
               aria-label="Adicionar curso"
-              to="/courses/new"
+              to="/courses/create"
               icon={<RiVideoAddFill />}
               size={useBreakpointValue(["sm", "md"])}
               colorScheme="blue"
