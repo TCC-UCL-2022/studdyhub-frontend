@@ -23,7 +23,8 @@
       "@enums": ["src/common/enums/index"],
       "@services/*": ["src/services/*"],
       "@config": ["src/common/config/index"],
-      "@constants": ["src/common/constants/index"]
+      "@constants": ["src/common/constants/index"],
+      "@lib": ["src/common/lib/index"]
     }
   },
   "include": ["src"]

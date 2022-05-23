@@ -9,6 +9,7 @@ module.exports = {
       "@routes": path.resolve(__dirname, "src/common/routes/index.ts"),
       "@config": path.resolve(__dirname, "src/common/config/index.ts"),
       "@constants": path.resolve(__dirname, "src/common/constants/index.ts"),
+      "@lib": path.resolve(__dirname, "src/common/lib/index.ts"),
     },
   },
 };

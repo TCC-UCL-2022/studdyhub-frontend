@@ -2,7 +2,7 @@ import { environments } from "@config";
 import { ACCESS_TOKEN_KEY } from "@constants";
 import axios, { AxiosInstance } from "axios";
 
-export const createHttpCLient = (): AxiosInstance => {
+const createHttpCLient = (): AxiosInstance => {
   const baseUrl = environments.REACT_APP_BACKEND_URL;
   const token = localStorage.getItem(ACCESS_TOKEN_KEY);
 
@@ -21,3 +21,5 @@ export const createHttpCLient = (): AxiosInstance => {
 
   return axiosInstance;
 };
+
+export const httpClient = createHttpCLient();

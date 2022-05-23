@@ -1,4 +1,4 @@
-import { httpClient } from "@config";
+import { httpClient } from "@lib";
 import { IUser } from "./types";
 
 export const UserService = {
