@@ -1,4 +1,4 @@
-export * from "./home";
-export * from "./login";
+export * from "./auth";
+export * from "./courses";
 export * from "./not-found";
 export * from "./onboarding";

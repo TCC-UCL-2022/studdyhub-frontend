@@ -1,4 +1,10 @@
-import { HomePage, LoginPage, NotFoundPage, OnboardingPage } from "@pages";
+import {
+  CreateCoursePage,
+  HomePage,
+  LoginPage,
+  NotFoundPage,
+  OnboardingPage,
+} from "@pages";
 
 interface IRoute {
   path: string;
@@ -15,6 +21,10 @@ export const authenticatedRoutes: IRoute[] = [
   {
     path: "/onboarding",
     component: <OnboardingPage />,
+  },
+  {
+    path: "/courses/create",
+    component: <CreateCoursePage />,
   },
 ];
 
