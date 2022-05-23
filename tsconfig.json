@@ -24,7 +24,8 @@
       "@services/*": ["src/services/*"],
       "@config": ["src/common/config/index"],
       "@constants": ["src/common/constants/index"],
-      "@lib": ["src/common/lib/index"]
+      "@lib": ["src/common/lib/index"],
+      "@assets": ["src/common/assets/index"]
     }
   },
   "include": ["src"]

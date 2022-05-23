@@ -10,6 +10,7 @@ module.exports = {
       "@config": path.resolve(__dirname, "src/common/config/index.ts"),
       "@constants": path.resolve(__dirname, "src/common/constants/index.ts"),
       "@lib": path.resolve(__dirname, "src/common/lib/index.ts"),
+      "@assets": path.resolve(__dirname, "src/common/assets/index.ts"),
     },
   },
 };
