@@ -22,6 +22,7 @@ export const Header = (): JSX.Element => {
       bgColor={useColorModeValue("white", "gray.800")}
       boxShadow="sm"
       transition="0.15s all"
+      w="100%"
     >
       <Flex w="100%" maxW={1600} mx="auto" px={["2", "4", "6"]} align="center">
         <Logo />

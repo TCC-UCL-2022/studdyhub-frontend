@@ -19,6 +19,8 @@ export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
       overflow="hidden"
       bgColor={bgColor}
       transition="0.15s all"
+      align="center"
+      w="100%"
     >
       <Header />
       <Flex
@@ -29,6 +31,7 @@ export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
         px={["2", "4", "6"]}
         overflow="hidden"
         height="100%"
+        justify="center"
       >
         {children}
       </Flex>

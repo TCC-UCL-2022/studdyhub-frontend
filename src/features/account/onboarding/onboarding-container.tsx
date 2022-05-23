@@ -4,7 +4,13 @@ import { OnboardingSelectRole } from "./onboarding-select-role";
 
 export const OnboardingContainer = (): JSX.Element => {
   return (
-    <VStack spacing={["10"]} textAlign="center">
+    <VStack
+      spacing={["10"]}
+      textAlign="center"
+      justify="center"
+      w="100%"
+      maxW="container.sm"
+    >
       <Heading>Bem vindo ao Studdyhub!</Heading>
 
       <Text fontSize="xl">Para começar, selecione o seu perfil.</Text>

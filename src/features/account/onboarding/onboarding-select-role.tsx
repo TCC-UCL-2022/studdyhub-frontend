@@ -26,7 +26,7 @@ export const OnboardingSelectRole = (): JSX.Element => {
   const group = getRootProps();
 
   return (
-    <HStack {...group} w="100%">
+    <HStack {...group} w="100%" justify="center">
       {options.map(({ label, value }) => (
         <RadioCard key={value} {...getRadioProps({ value })} fullWidth>
           {label}
