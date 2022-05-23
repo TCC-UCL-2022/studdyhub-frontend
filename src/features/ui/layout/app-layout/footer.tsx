@@ -16,7 +16,7 @@ export const Footer = (): JSX.Element => (
     color="gray.600"
     h={["16", "20"]}
     bgColor={useColorModeValue("white", "gray.800")}
-    boxShadow="sm"
+    boxShadow="md"
     transition="0.15s all"
     w="100%"
   >

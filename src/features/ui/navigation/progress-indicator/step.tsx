@@ -9,9 +9,6 @@ export interface StepProps extends StepBulletProps {
   title?: string;
   subtitle?: string;
   children?: JSX.Element;
-  /**
-   * Defines if the step is disabled
-   */
   disabled?: boolean;
 }
 
@@ -45,7 +42,7 @@ export const Step: React.FC<StepProps> = ({
       position="relative"
       className={`${containerClass} ${disabledClass} ${completedClass}`}
     >
-      <Flex h="100%" justifyContent="center">
+      <Flex justifyContent="center">
         <StepBullet
           type={type}
           done={done}
@@ -83,7 +80,7 @@ export const Step: React.FC<StepProps> = ({
         >
           {subtitle}
         </Text>
-        <Box py="3">{children}</Box>
+        {current && <Box py="3">{children}</Box>}
       </Flex>
     </StepContainer>
   );

@@ -1,1 +1,1 @@
-export * from "./accent-step";
+export * from "./progress-indicator";
