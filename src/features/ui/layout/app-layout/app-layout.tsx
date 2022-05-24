@@ -3,21 +3,20 @@ import { useTitle } from "@features/ui/hooks";
 import { Footer } from "./footer";
 import { Header } from "./header";
 
-type AppLayoutProps = {
+export type AppLayoutProps = {
   title: string;
   children: React.ReactNode;
 };
 
 export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
   useTitle(title);
-  const bgColor = useColorModeValue("gray.50", "gray.900");
 
   return (
     <Flex
       direction="column"
       h="100vh"
       overflow="hidden"
-      bgColor={bgColor}
+      bgColor={useColorModeValue("gray.100", "gray.900")}
       transition="0.15s all"
       align="center"
       w="100%"
