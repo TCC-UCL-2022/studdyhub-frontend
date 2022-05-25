@@ -13,28 +13,35 @@ export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
 
   return (
     <Flex
-      direction="column"
       h="100vh"
-      overflow="hidden"
-      bgColor={useColorModeValue("gray.100", "gray.900")}
-      transition="0.15s all"
-      align="center"
       w="100%"
+      direction="column"
+      overflow="hidden"
+      transition="0.15s all"
+      justify="flex-start"
     >
       <Header />
       <Flex
-        w="100%"
-        my="2"
-        maxW={1600}
-        mx="auto"
-        px={["2", "4", "6"]}
-        overflow="hidden"
-        height="100%"
-        justify="center"
+        bgColor={useColorModeValue("gray.200", "gray.900")}
+        direction="column"
+        align="center"
+        h="100%"
+        overflowY="auto"
+        scrollBehavior="smooth"
       >
-        {children}
+        <Flex
+          w="100%"
+          flexGrow="1"
+          my={{ base: 4, md: 6, "2xl": 10 }}
+          maxW={1600}
+          mx="auto"
+          px={["2", "4", "6"]}
+          justify="center"
+        >
+          {children}
+        </Flex>
+        <Footer mt="auto" h="100%" />
       </Flex>
-      <Footer />
     </Flex>
   );
 };

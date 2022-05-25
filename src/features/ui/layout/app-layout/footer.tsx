@@ -1,6 +1,7 @@
 import {
   ButtonGroup,
   Flex,
+  FlexProps,
   IconButton,
   Link,
   Stack,
@@ -9,8 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { RiGithubFill } from "react-icons/ri";
 
-export const Footer = (): JSX.Element => (
+export const Footer = (props: FlexProps): JSX.Element => (
   <Flex
+    {...props}
     as="footer"
     role="contentinfo"
     color="gray.600"
