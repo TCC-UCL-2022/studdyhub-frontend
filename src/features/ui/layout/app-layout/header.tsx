@@ -13,8 +13,14 @@ import { RiMoonFill, RiSunFill, RiVideoAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { Logo } from "./logo";
 
-export const Header = (): JSX.Element => {
+type HeaderProps = {
+  hideOptions?: boolean;
+};
+
+export const Header = ({ hideOptions }: HeaderProps): JSX.Element => {
   const { toggleColorMode } = useColorMode();
+  const toggleThemeIcon = useColorModeValue(<RiSunFill />, <RiMoonFill />);
+  const iconsSize = useBreakpointValue(["sm", "md"]);
 
   return (
     <>
@@ -39,28 +45,30 @@ export const Header = (): JSX.Element => {
         >
           <Logo />
 
-          <HStack spacing={["2", "4"]} ml="auto">
-            <Tooltip label="Trocar tema">
-              <IconButton
-                aria-label="Trocar tema"
-                onClick={toggleColorMode}
-                icon={useColorModeValue(<RiSunFill />, <RiMoonFill />)}
-                size={useBreakpointValue(["sm", "md"])}
-              />
-            </Tooltip>
-            <Tooltip label="Adicionar curso">
-              <IconButton
-                as={Link}
-                aria-label="Adicionar curso"
-                to="/courses/create"
-                icon={<RiVideoAddFill />}
-                size={useBreakpointValue(["sm", "md"])}
-                colorScheme="blue"
-              />
-            </Tooltip>
+          {!hideOptions && (
+            <HStack spacing={["2", "4"]} ml="auto">
+              <Tooltip label="Trocar tema">
+                <IconButton
+                  aria-label="Trocar tema"
+                  onClick={toggleColorMode}
+                  icon={toggleThemeIcon}
+                  size={iconsSize}
+                />
+              </Tooltip>
+              <Tooltip label="Adicionar curso">
+                <IconButton
+                  as={Link}
+                  aria-label="Adicionar curso"
+                  to="/courses/create"
+                  icon={<RiVideoAddFill />}
+                  size={iconsSize}
+                  colorScheme="blue"
+                />
+              </Tooltip>
 
-            <ProfileMenu />
-          </HStack>
+              <ProfileMenu />
+            </HStack>
+          )}
         </Flex>
       </Flex>
       <Box bgColor="red" h={["14", "16"]}>

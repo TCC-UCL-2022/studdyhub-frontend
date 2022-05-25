@@ -6,9 +6,14 @@ import { Header } from "./header";
 export type AppLayoutProps = {
   title: string;
   children: React.ReactNode;
+  hideOptions?: boolean;
 };
 
-export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
+export const AppLayout = ({
+  children,
+  title,
+  hideOptions,
+}: AppLayoutProps): JSX.Element => {
   useTitle(title);
 
   return (
@@ -20,7 +25,7 @@ export const AppLayout = ({ children, title }: AppLayoutProps): JSX.Element => {
       transition="0.15s all"
       justify="flex-start"
     >
-      <Header />
+      <Header hideOptions={hideOptions} />
       <Flex
         bgColor={useColorModeValue("gray.200", "gray.900")}
         direction="column"

@@ -5,7 +5,7 @@ import {
 import { AppLayout } from "@features/ui/layout";
 
 export const OnboardingPage = (): JSX.Element => (
-  <AppLayout title="Primeiro Acesso">
+  <AppLayout title="Primeiro Acesso" hideOptions>
     <OnboardingContextProvider>
       <OnboardingContainer />
     </OnboardingContextProvider>
