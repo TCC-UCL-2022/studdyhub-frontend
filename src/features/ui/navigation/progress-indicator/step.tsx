@@ -1,5 +1,5 @@
 import { useColorscheme } from "@/features/ui/hooks";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { useProgressIndicatorContext } from "./progress-indicator.context";
 import { StepBullet, StepBulletProps } from "./step-blullet";
@@ -32,6 +32,7 @@ export const Step: React.FC<StepProps> = ({
   const disabledClass = disabled ? "progress-step--disabled" : "";
   const completedClass = done ? "progress-step--completed" : "";
   const colors = useColorscheme(colorScheme);
+  const titleColor = useColorModeValue("gray.900", "gray.200");
 
   return (
     <StepContainer
@@ -65,7 +66,7 @@ export const Step: React.FC<StepProps> = ({
           className="progress-step__title"
           textAlign={mode === "vertical" ? "initial" : "center"}
           fontWeight={current ? "bold" : "semibold"}
-          color={current && !disabled ? colors.accent : "gray.900"}
+          color={current && !disabled ? colors.accent : titleColor}
           opacity={disabled ? 0.4 : 1}
         >
           {title}

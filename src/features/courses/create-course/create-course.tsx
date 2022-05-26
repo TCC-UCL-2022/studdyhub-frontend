@@ -1,12 +1,5 @@
-import {
-  Flex,
-  Heading,
-  useBreakpointValue,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { ProgressIndicator } from "@features/ui/navigation";
-import { CreateActivityStep } from "./create-activity-step";
-import { CreateCourseStep } from "./create-course-step";
+import { Flex, Heading, useColorModeValue } from "@chakra-ui/react";
+import { StepsContainer } from "./steps-container";
 
 export const CreateCourse = (): JSX.Element => {
   return (
@@ -22,18 +15,11 @@ export const CreateCourse = (): JSX.Element => {
       borderRadius="lg"
       boxShadow="md"
     >
-      <Heading size="md">Criar um curso</Heading>
+      <Heading textAlign="center" size="md">
+        Criar um curso
+      </Heading>
 
-      <ProgressIndicator
-        mode={useBreakpointValue(["vertical", "vertical", "horizontal"])}
-        colorScheme="blue"
-        w="100%"
-        justify="center"
-        my="auto"
-      >
-        <CreateCourseStep />
-        <CreateActivityStep />
-      </ProgressIndicator>
+      <StepsContainer />
     </Flex>
   );
 };
