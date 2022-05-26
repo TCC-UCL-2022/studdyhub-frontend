@@ -9,6 +9,6 @@ export enum ActivityType {
 export interface IActivity extends BaseEntity {
   title: string;
   description: string;
-  link?: string;
+  content: string;
   type: ActivityType;
 }
