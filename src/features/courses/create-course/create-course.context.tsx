@@ -7,7 +7,7 @@ export enum CreateCourseSteps {
 
 type CreateCourseContextType = {
   currentStep: CreateCourseSteps;
-  setStep: (step: CreateCourseSteps) => void;
+  setStep: React.Dispatch<React.SetStateAction<CreateCourseSteps>>;
 };
 
 const defaultValue: CreateCourseContextType = {

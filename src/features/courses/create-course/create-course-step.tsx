@@ -1,3 +1,6 @@
+import { useAuthenticationContext } from "@/features/authentication";
+import { CourseService } from "@/services/courses";
+import { CreateCourseDto } from "@/services/courses/dto";
 import {
   Button,
   FormControl,
@@ -8,12 +11,26 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { RiArrowRightFill } from "react-icons/ri";
+import { useCreateCourseContext } from "./create-course.context";
 
-export const CreateCourseStep = (): JSX.Element => {
-  const { register, handleSubmit } = useForm();
+export const CreateCourseStep = (): JSX.Element | null => {
+  const { register, handleSubmit } = useForm<CreateCourseDto>();
+  const { user } = useAuthenticationContext();
+  const { setStep } = useCreateCourseContext();
 
-  const onSubmit = (data: any): void => {
-    console.log(data);
+  if (!user) {
+    return null;
+  }
+
+  const onSubmit = async (data: CreateCourseDto) => {
+    const course = await CourseService.createCourse({
+      ...data,
+      userId: user.cognitoId,
+    });
+
+    if (course) {
+      setStep((prev) => prev + 1);
+    }
   };
 
   return (

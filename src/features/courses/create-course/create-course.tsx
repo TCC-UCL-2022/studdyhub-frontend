@@ -15,9 +15,7 @@ export const CreateCourse = (): JSX.Element => {
       borderRadius="lg"
       boxShadow="md"
     >
-      <Heading textAlign="center" size="md">
-        Criar um curso
-      </Heading>
+      <Heading size="md">Criar um curso</Heading>
 
       <StepsContainer />
     </Flex>

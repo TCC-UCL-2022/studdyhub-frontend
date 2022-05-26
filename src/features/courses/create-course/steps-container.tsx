@@ -33,8 +33,13 @@ export const StepsContainer = (): JSX.Element => {
           w="100%"
           justify="center"
         >
-          {steps.map(({ title, subTitle }) => (
-            <Step title={title} subtitle={subTitle} />
+          {steps.map(({ title, subTitle }, index) => (
+            <Step
+              title={title}
+              subtitle={subTitle}
+              current={step === index}
+              done={step > index}
+            />
           ))}
         </ProgressIndicator>
 
