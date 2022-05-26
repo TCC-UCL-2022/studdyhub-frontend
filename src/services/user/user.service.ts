@@ -1,5 +1,5 @@
 import { httpClient } from "@/lib";
-import { IUser } from "./types";
+import { IUser } from "./user.types";
 
 export const UserService = {
   getUser: async (cognitoId: string): Promise<IUser | null> => {
