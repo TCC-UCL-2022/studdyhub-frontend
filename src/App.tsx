@@ -1,5 +1,6 @@
 import { reactQueryClient } from "@/lib";
 import { Router } from "@/routes";
+import { theme } from "@/theme";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Amplify } from "aws-amplify";
@@ -12,7 +13,7 @@ function App() {
   return (
     <QueryClientProvider client={reactQueryClient}>
       <Authenticator.Provider>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Router />
         </ChakraProvider>
       </Authenticator.Provider>
