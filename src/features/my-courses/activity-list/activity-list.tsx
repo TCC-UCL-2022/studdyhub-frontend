@@ -1,17 +1,27 @@
-import { Text, VStack } from "@chakra-ui/react";
+import { Button, List, Text, VStack } from "@chakra-ui/react";
+import { RiAddFill } from "react-icons/ri";
 import { ActivityItem } from "./activity-item";
-import { useActivityListContext } from "./activity-list.context";
+import { activityMock } from "./mocks";
 
 export const ActivityList = (): JSX.Element => {
-  const { activities } = useActivityListContext();
+  // const { activities } = useActivityListContext();
 
   return (
-    <VStack spacing="5" w="100%">
-      {activities.length === 0 && <Text>Nenhuma atividade cadastrada</Text>}
+    <VStack spacing="5" w="100%" flexGrow="1">
+      {activityMock.length === 0 && <Text>Nenhuma atividade cadastrada</Text>}
 
-      {activities.map((_, index) => (
-        <ActivityItem key={`activity-item-${index}`} />
-      ))}
+      <List spacing={3} w="100%" maxW="lg">
+        {activityMock.map((activity) => (
+          <ActivityItem
+            key={`activity-item-${activity.id}`}
+            activity={activity}
+          />
+        ))}
+      </List>
+
+      <Button colorScheme="blue" size="sm" rightIcon={<RiAddFill />}>
+        Adicionar atividade
+      </Button>
     </VStack>
   );
 };

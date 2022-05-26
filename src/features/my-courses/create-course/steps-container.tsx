@@ -1,6 +1,6 @@
 import { ProgressIndicator, Step } from "@/features/ui/navigation";
 import { ICourse } from "@/services/courses";
-import { VStack } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import { CreateActivityStep } from "./create-activity-step";
 import { CreateCourseStep } from "./create-course-step";
@@ -36,7 +36,7 @@ export const StepsContainer = ({
     <CreateCourseContext.Provider
       value={{ currentStep: step, setStep, course, setCourse }}
     >
-      <VStack spacing="5" mt="5">
+      <Flex mt="5" flexGrow="1" direction="column">
         <ProgressIndicator
           mode="horizontal"
           colorScheme="blue"
@@ -45,6 +45,7 @@ export const StepsContainer = ({
         >
           {steps.map(({ title, subTitle }, index) => (
             <Step
+              key={`create-course-step-${title}`}
               title={title}
               subtitle={subTitle}
               current={step === index}
@@ -54,7 +55,7 @@ export const StepsContainer = ({
         </ProgressIndicator>
 
         {steps[step].component}
-      </VStack>
+      </Flex>
     </CreateCourseContext.Provider>
   );
 };
