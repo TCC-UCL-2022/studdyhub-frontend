@@ -1,7 +1,14 @@
+import { ICourse } from "@/services/courses";
 import { Flex, Heading, useColorModeValue } from "@chakra-ui/react";
 import { StepsContainer } from "./steps-container";
 
-export const CreateCourse = (): JSX.Element => {
+type CreateCourseProps = {
+  courseToEdit?: ICourse;
+};
+
+export const CreateCourse = ({
+  courseToEdit,
+}: CreateCourseProps): JSX.Element => {
   return (
     <Flex
       w="100%"
@@ -17,7 +24,7 @@ export const CreateCourse = (): JSX.Element => {
     >
       <Heading size="md">Criar um curso</Heading>
 
-      <StepsContainer />
+      <StepsContainer courseToEdit={courseToEdit} />
     </Flex>
   );
 };

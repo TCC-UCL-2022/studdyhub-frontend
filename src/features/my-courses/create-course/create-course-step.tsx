@@ -9,29 +9,52 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { RiArrowRightFill } from "react-icons/ri";
 import { useCreateCourseContext } from "./create-course.context";
 
 export const CreateCourseStep = (): JSX.Element | null => {
-  const { register, handleSubmit } = useForm<CreateCourseDto>();
   const { user } = useAuthenticationContext();
-  const { setStep } = useCreateCourseContext();
+  const { course, setStep, setCourse } = useCreateCourseContext();
 
-  if (!user) {
-    return null;
-  }
+  const { register, handleSubmit } = useForm<CreateCourseDto>({
+    defaultValues: course ?? undefined,
+  });
 
-  const onSubmit = async (data: CreateCourseDto) => {
-    const course = await CourseService.createCourse({
-      ...data,
-      userId: user.cognitoId,
-    });
+  const createOrUpdateCourse = useCallback(
+    async (data: CreateCourseDto) => {
+      if (!user) {
+        return null;
+      }
 
-    if (course) {
-      setStep((prev) => prev + 1);
-    }
-  };
+      if (course?.id) {
+        const updatedCourse = await CourseService.updateCourse(course.id, data);
+
+        return updatedCourse;
+      }
+
+      const courseCreated = await CourseService.createCourse({
+        ...data,
+        userId: user.cognitoId,
+      });
+
+      return courseCreated;
+    },
+    [course, user]
+  );
+
+  const onSubmit = useCallback(
+    async (data: CreateCourseDto) => {
+      const newCourse = await createOrUpdateCourse(data);
+
+      if (newCourse) {
+        setCourse(newCourse);
+        setStep((prev) => prev + 1);
+      }
+    },
+    [createOrUpdateCourse, setCourse, setStep]
+  );
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)} w="100%" spacing="5">

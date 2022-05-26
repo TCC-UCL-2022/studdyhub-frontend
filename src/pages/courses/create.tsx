@@ -1,4 +1,4 @@
-import { CreateCourse } from "@/features/courses";
+import { CreateCourse } from "@/features/my-courses";
 import { AppLayout } from "@/features/ui/layout";
 
 export const CreateCoursePage = (): JSX.Element => {

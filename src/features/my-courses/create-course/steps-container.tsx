@@ -1,4 +1,5 @@
 import { ProgressIndicator, Step } from "@/features/ui/navigation";
+import { ICourse } from "@/services/courses";
 import { VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { CreateActivityStep } from "./create-activity-step";
@@ -21,11 +22,20 @@ const steps = [
   },
 ];
 
-export const StepsContainer = (): JSX.Element => {
+type StepsContainerProps = {
+  courseToEdit?: ICourse | null;
+};
+
+export const StepsContainer = ({
+  courseToEdit = null,
+}: StepsContainerProps): JSX.Element => {
   const [step, setStep] = useState(CreateCourseSteps.CourseInfo);
+  const [course, setCourse] = useState<ICourse | null>(courseToEdit);
 
   return (
-    <CreateCourseContext.Provider value={{ currentStep: step, setStep }}>
+    <CreateCourseContext.Provider
+      value={{ currentStep: step, setStep, course, setCourse }}
+    >
       <VStack spacing="5" mt="5">
         <ProgressIndicator
           mode="horizontal"
