@@ -1,5 +1,5 @@
+import { useTitle } from "@/features/ui/hooks";
 import { Flex, useColorModeValue } from "@chakra-ui/react";
-import { useTitle } from "@features/ui/hooks";
 import { Footer } from "./footer";
 import { Header } from "./header";
 

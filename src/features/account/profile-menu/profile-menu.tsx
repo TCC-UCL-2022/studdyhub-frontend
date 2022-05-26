@@ -1,3 +1,5 @@
+import { Roles } from "@/enums";
+import { useAuthenticationContext } from "@/features/authentication";
 import {
   Avatar,
   Box,
@@ -12,8 +14,6 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { Roles } from "@enums";
-import { useAuthenticationContext } from "@features/authentication";
 import { RiLogoutBoxLine, RiPlayList2Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 

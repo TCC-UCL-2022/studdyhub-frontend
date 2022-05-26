@@ -4,7 +4,7 @@ import {
   LoginPage,
   NotFoundPage,
   OnboardingPage,
-} from "@pages";
+} from "@/pages";
 
 interface IRoute {
   path: string;

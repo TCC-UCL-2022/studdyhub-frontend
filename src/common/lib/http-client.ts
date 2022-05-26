@@ -1,5 +1,5 @@
-import { environments } from "@config";
-import { ACCESS_TOKEN_KEY } from "@constants";
+import { environments } from "@/config";
+import { ACCESS_TOKEN_KEY } from "@/constants";
 import axios, { AxiosInstance } from "axios";
 
 const createHttpCLient = (): AxiosInstance => {

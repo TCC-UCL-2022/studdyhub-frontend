@@ -1,16 +1,22 @@
 const path = require("path");
+
+const tsconfig = require("./tsconfig.path.json");
+
+const removeAsterisk = (path) => path.replace("/*", "");
+
+const aliasProps = Object.entries(tsconfig.compilerOptions.paths).map(
+  ([key, value]) => {
+    const newKey = removeAsterisk(key);
+    let newValue = removeAsterisk(value[0]);
+    newValue = path.resolve(__dirname, newValue);
+    return [newKey, newValue];
+  }
+);
+
+const alias = Object.fromEntries(aliasProps);
+
 module.exports = {
   webpack: {
-    alias: {
-      "@features": path.resolve(__dirname, "src/features"),
-      "@services": path.resolve(__dirname, "src/services"),
-      "@pages": path.resolve(__dirname, "src/pages/index.ts"),
-      "@enums": path.resolve(__dirname, "src/common/enums/index.ts"),
-      "@routes": path.resolve(__dirname, "src/common/routes/index.ts"),
-      "@config": path.resolve(__dirname, "src/common/config/index.ts"),
-      "@constants": path.resolve(__dirname, "src/common/constants/index.ts"),
-      "@lib": path.resolve(__dirname, "src/common/lib/index.ts"),
-      "@assets": path.resolve(__dirname, "src/common/assets/index.ts"),
-    },
+    alias,
   },
 };

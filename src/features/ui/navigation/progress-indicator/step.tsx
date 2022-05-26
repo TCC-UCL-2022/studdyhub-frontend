@@ -1,5 +1,5 @@
+import { useColorscheme } from "@/features/ui/hooks";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useColorscheme } from "@features/ui/hooks";
 import React from "react";
 import { useProgressIndicatorContext } from "./progress-indicator.context";
 import { StepBullet, StepBulletProps } from "./step-blullet";

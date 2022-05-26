@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.path.json",
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -14,19 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@features/*": ["src/features/*"],
-      "@pages": ["src/pages/index"],
-      "@routes": ["src/common/routes/index"],
-      "@enums": ["src/common/enums/index"],
-      "@services/*": ["src/services/*"],
-      "@config": ["src/common/config/index"],
-      "@constants": ["src/common/constants/index"],
-      "@lib": ["src/common/lib/index"],
-      "@assets": ["src/common/assets/index"]
-    }
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }

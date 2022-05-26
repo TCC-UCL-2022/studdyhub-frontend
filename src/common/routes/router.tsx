@@ -1,4 +1,4 @@
-import { AuthenticationProvider } from "@features/authentication";
+import { AuthenticationProvider } from "@/features/authentication";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { authenticatedRoutes, routes } from "./routes";
 

@@ -1,8 +1,8 @@
+import { ACCESS_TOKEN_KEY } from "@/constants";
+import { Roles } from "@/enums";
+import { IUser, UserService } from "@/services/user";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Center, Spinner } from "@chakra-ui/react";
-import { ACCESS_TOKEN_KEY } from "@constants";
-import { Roles } from "@enums";
-import { IUser, UserService } from "@services/user";
 import {
   createContext,
   PropsWithChildren,

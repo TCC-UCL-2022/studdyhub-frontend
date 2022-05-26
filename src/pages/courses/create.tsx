@@ -1,5 +1,5 @@
-import { CreateCourse } from "@features/courses";
-import { AppLayout } from "@features/ui/layout";
+import { CreateCourse } from "@/features/courses";
+import { AppLayout } from "@/features/ui/layout";
 
 export const CreateCoursePage = (): JSX.Element => {
   return (

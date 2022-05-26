@@ -1,5 +1,5 @@
+import { Roles } from "@/enums";
 import { CognitoUserAmplify } from "@aws-amplify/ui-react/node_modules/@aws-amplify/ui";
-import { Roles } from "@enums";
 
 export interface IUser {
   id: string;

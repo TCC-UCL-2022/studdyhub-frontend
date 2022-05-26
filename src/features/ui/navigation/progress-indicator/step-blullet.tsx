@@ -1,5 +1,5 @@
+import { ColorScheme, useColorscheme } from "@/features/ui/hooks";
 import { Flex, Icon, Text } from "@chakra-ui/react";
-import { ColorScheme, useColorscheme } from "@features/ui/hooks";
 import React from "react";
 import { RiAlertLine, RiCheckLine } from "react-icons/ri";
 

@@ -1,4 +1,4 @@
-import { logos } from "@assets";
+import { logos } from "@/assets";
 import { Image, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 

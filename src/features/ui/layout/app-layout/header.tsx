@@ -1,3 +1,4 @@
+import { ProfileMenu } from "@/features/account";
 import {
   Box,
   Flex,
@@ -8,7 +9,6 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { ProfileMenu } from "@features/account";
 import { RiMoonFill, RiSunFill, RiVideoAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { Logo } from "./logo";

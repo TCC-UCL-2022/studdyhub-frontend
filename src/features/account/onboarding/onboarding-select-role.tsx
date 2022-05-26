@@ -1,6 +1,6 @@
+import { Roles } from "@/enums";
+import { RadioCard } from "@/features/ui/forms";
 import { HStack, useRadioGroup } from "@chakra-ui/react";
-import { Roles } from "@enums";
-import { RadioCard } from "@features/ui/forms";
 import { useOnboardingContext } from "./onboarding.context";
 
 const options = [
