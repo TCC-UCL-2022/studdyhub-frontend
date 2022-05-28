@@ -10,10 +10,14 @@ import {
 
 type ActivityListContextProps = {
   activities: IActivity[];
+  setActivities: React.Dispatch<React.SetStateAction<IActivity[]>>;
+  courseId: string;
 };
 
 const defaultValue: ActivityListContextProps = {
   activities: [],
+  setActivities: () => {},
+  courseId: "",
 };
 
 export const ActivityListContext =
@@ -42,7 +46,9 @@ export const ActivityListProvider = ({
   }, [fetchActivities]);
 
   return (
-    <ActivityListContext.Provider value={{ activities }}>
+    <ActivityListContext.Provider
+      value={{ activities, courseId, setActivities }}
+    >
       {children}
     </ActivityListContext.Provider>
   );

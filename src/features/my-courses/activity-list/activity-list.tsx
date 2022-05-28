@@ -2,18 +2,18 @@ import { Button, List, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { RiAddFill } from "react-icons/ri";
 import { CreateActivityModal } from "../create-course-activity";
 import { ActivityItem } from "./activity-item";
-import { activityMock } from "./mocks";
+import { useActivityListContext } from "./activity-list.context";
 
 export const ActivityList = (): JSX.Element => {
-  // const { activities } = useActivityListContext();
+  const { activities } = useActivityListContext();
   const { onOpen, ...modalPros } = useDisclosure();
 
   return (
     <VStack spacing="5" w="100%" flexGrow="1">
-      {activityMock.length === 0 && <Text>Nenhuma atividade cadastrada</Text>}
+      {activities.length === 0 && <Text>Nenhuma atividade cadastrada</Text>}
 
       <List spacing={3} w="100%" maxW="lg">
-        {activityMock.map((activity) => (
+        {activities.map((activity) => (
           <ActivityItem
             key={`activity-item-${activity.id}`}
             activity={activity}

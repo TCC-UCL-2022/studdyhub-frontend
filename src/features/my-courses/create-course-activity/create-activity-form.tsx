@@ -1,41 +1,62 @@
 import { RadioButton, RadioButtonGroup } from "@/features/ui/forms";
-import { ActivityType, IActivity } from "@/services/activities";
+import {
+  ActivitiesService,
+  ActivityType,
+  IActivity,
+} from "@/services/activities";
+import { CreateActivityDto } from "@/services/activities/dto";
 import {
   Button,
   FormControl,
   FormLabel,
   Input,
-  Portal,
+  Text,
   Textarea,
   VStack,
 } from "@chakra-ui/react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { RiSave3Fill } from "react-icons/ri";
+import { useActivityListContext } from "../activity-list";
 import { CreateVideoActivity } from "./create-video-activity";
 
 export type CreateActivityFormProps = {
   activityToEdit?: IActivity;
   onClose?: () => void;
-  modalFooterRef?: React.MutableRefObject<HTMLElement | null>;
 };
 
 export const CreateActivityForm = ({
   activityToEdit,
   onClose,
-  modalFooterRef,
 }: CreateActivityFormProps): JSX.Element => {
+  const [activityType, setActivityType] = useState<ActivityType>(
+    activityToEdit?.type ?? ActivityType.VIDEO
+  );
+
+  const { setActivities, courseId } = useActivityListContext();
+
   const { register, getValues, setValue, handleSubmit } = useForm({
     defaultValues: activityToEdit,
   });
 
   const onSubmit = useCallback(
-    (data: IActivity) => {
-      console.log(data);
-      onClose?.();
+    async (data: CreateActivityDto) => {
+      const newActivity = await ActivitiesService.createCourseActivity(
+        courseId,
+        data
+      );
+
+      if (newActivity) {
+        setActivities((prev) => [...prev, newActivity]);
+        onClose?.();
+      }
     },
-    [onClose]
+    [courseId, onClose, setActivities]
   );
+
+  useEffect(() => {
+    register("content", { required: true });
+  }, [register]);
 
   return (
     <VStack as="form" w="100%" spacing="5" onSubmit={handleSubmit(onSubmit)}>
@@ -61,11 +82,13 @@ export const CreateActivityForm = ({
 
       <FormControl isRequired>
         <FormLabel htmlFor="type">Tipo de atividade</FormLabel>
+
         <RadioButtonGroup
           onChange={(value) => {
             setValue("type", value as ActivityType);
+            setActivityType(value as ActivityType);
           }}
-          value={getValues().type}
+          value={activityType}
           variant="outline"
         >
           <RadioButton value={ActivityType.VIDEO}>Video</RadioButton>
@@ -74,23 +97,25 @@ export const CreateActivityForm = ({
         </RadioButtonGroup>
       </FormControl>
 
-      <CreateVideoActivity
-        onChange={(value) => {
-          setValue("content", value);
-        }}
-        value={getValues("content")}
-      />
+      {activityType === ActivityType.VIDEO && (
+        <CreateVideoActivity
+          onChange={(value) => {
+            setValue("content", value);
+          }}
+          value={getValues("content")}
+        />
+      )}
+      {activityType === ActivityType.EXERCISE && <Text>Não implementado</Text>}
+      {activityType === ActivityType.ARTICLE && <Text>Não implementado</Text>}
 
-      <Portal containerRef={modalFooterRef}>
-        <Button
-          alignSelf="flex-end"
-          type="submit"
-          colorScheme="blue"
-          rightIcon={<RiSave3Fill />}
-        >
-          Salvar
-        </Button>
-      </Portal>
+      <Button
+        alignSelf="flex-end"
+        type="submit"
+        colorScheme="blue"
+        rightIcon={<RiSave3Fill />}
+      >
+        Salvar
+      </Button>
     </VStack>
   );
 };
