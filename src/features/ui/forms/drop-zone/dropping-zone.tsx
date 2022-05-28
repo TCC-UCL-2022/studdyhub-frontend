@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { Accept, useDropzone } from "react-dropzone";
 import { AiFillFileAdd } from "react-icons/ai";
 
-type DropZoneProps = {
+export type DropZoneProps = {
   onChange: (file: File | null) => void;
   accept?: Accept;
 };
