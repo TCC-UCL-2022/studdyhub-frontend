@@ -1,5 +1,5 @@
 import { useAuthenticationContext } from "@/features/authentication";
-import { CourseService } from "@/services/courses";
+import { CourseService, ICourse } from "@/services/courses";
 import { CreateCourseDto } from "@/services/courses/dto";
 import {
   Button,
@@ -46,7 +46,13 @@ export const CreateCourseStep = (): JSX.Element | null => {
 
   const onSubmit = useCallback(
     async (data: CreateCourseDto) => {
-      const newCourse = await createOrUpdateCourse(data);
+      // const newCourse = await createOrUpdateCourse(data);
+
+      const newCourse: ICourse = {
+        ...data,
+        id: "1",
+        published: false,
+      };
 
       if (newCourse) {
         setCourse(newCourse);

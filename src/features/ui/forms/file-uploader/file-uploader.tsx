@@ -15,16 +15,28 @@ export type UploadTask = {
 
 type FileUploaderProps = {
   onUploaded: (value: string) => void;
+  onSelected?: (file: File) => void;
   accept?: Accept;
 };
 
 export const FileUploader = ({
   onUploaded,
+  onSelected,
   accept,
 }: FileUploaderProps): JSX.Element => {
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
+
+  const handleSelect = useCallback(
+    (file: File | null) => {
+      if (file) {
+        setFile(file);
+        onSelected?.(file);
+      }
+    },
+    [onSelected]
+  );
 
   const handleUpload = useCallback(() => {
     if (file) {
@@ -50,7 +62,7 @@ export const FileUploader = ({
 
   return (
     <VStack w="100%" alignItems="flex-start" spacing="4">
-      {!file && <DroppingZone onChange={setFile} accept={accept} />}
+      {!file && <DroppingZone onChange={handleSelect} accept={accept} />}
       {file && (
         <FileItem file={file} onRemove={setFile} uploading={uploading} />
       )}

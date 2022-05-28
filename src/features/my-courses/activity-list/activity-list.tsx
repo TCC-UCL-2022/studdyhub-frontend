@@ -1,10 +1,12 @@
-import { Button, List, Text, VStack } from "@chakra-ui/react";
+import { Button, List, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { RiAddFill } from "react-icons/ri";
+import { CreateActivityModal } from "../create-course-activity";
 import { ActivityItem } from "./activity-item";
 import { activityMock } from "./mocks";
 
 export const ActivityList = (): JSX.Element => {
   // const { activities } = useActivityListContext();
+  const { onOpen, ...modalPros } = useDisclosure();
 
   return (
     <VStack spacing="5" w="100%" flexGrow="1">
@@ -19,9 +21,16 @@ export const ActivityList = (): JSX.Element => {
         ))}
       </List>
 
-      <Button colorScheme="blue" size="sm" rightIcon={<RiAddFill />}>
+      <Button
+        colorScheme="blue"
+        size="sm"
+        rightIcon={<RiAddFill />}
+        onClick={onOpen}
+      >
         Adicionar atividade
       </Button>
+
+      <CreateActivityModal modalProps={modalPros} />
     </VStack>
   );
 };
