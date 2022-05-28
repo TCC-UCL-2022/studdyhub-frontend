@@ -13,16 +13,18 @@ export const RadioButtonGroup = ({
   value,
   ...props
 }: RadioButtonGroupProps): JSX.Element => {
-  const { value: currentValue, setValue } = useRadioGroup({
+  const { value: currentValue, onChange: setValue } = useRadioGroup({
     value,
-    onChange,
+    onChange: (e) => {
+      onChange(e);
+    },
   });
 
   return (
-    <RadioButtonContext.Provider value={{ currentValue, setValue }}>
-      <ButtonGroup isAttached={isAttached} {...props}>
+    <ButtonGroup isAttached={isAttached} {...props}>
+      <RadioButtonContext.Provider value={{ currentValue, setValue }}>
         {children}
-      </ButtonGroup>
-    </RadioButtonContext.Provider>
+      </RadioButtonContext.Provider>
+    </ButtonGroup>
   );
 };
