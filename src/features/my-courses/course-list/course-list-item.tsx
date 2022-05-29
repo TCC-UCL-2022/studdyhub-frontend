@@ -1,4 +1,4 @@
-import { ICourse } from "@/services/courses";
+import { CourseService, ICourse } from "@/services/courses";
 import {
   Flex,
   HStack,
@@ -20,6 +20,7 @@ import {
   RiVideoUploadFill,
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { useCourseListContext } from "./course-list.context";
 
 type CourseListItemProps = {
   course: ICourse;
@@ -75,17 +76,27 @@ export const CourseListItem = ({
   course,
 }: CourseListItemProps): JSX.Element => {
   const navigate = useNavigate();
+  const { fetchCourses } = useCourseListContext();
   const iconColor = useColorModeValue("white", "black");
 
   const mapAction = useMemo(
     () => ({
-      [ItemAction.DELETE]: () => {},
+      [ItemAction.DELETE]: async () => {
+        await CourseService.deleteCourse(course.id);
+        await fetchCourses();
+      },
       [ItemAction.EDIT]: () => {},
-      [ItemAction.PUBLISH]: () => {},
-      [ItemAction.UNPUBLISH]: () => {},
+      [ItemAction.PUBLISH]: async () => {
+        await CourseService.updateCoursePublishStatus(course.id, true);
+        await fetchCourses();
+      },
+      [ItemAction.UNPUBLISH]: async () => {
+        await CourseService.updateCoursePublishStatus(course.id, true);
+        await fetchCourses();
+      },
       [ItemAction.VIEW]: () => navigate(`/my-courses/${course.id}`),
     }),
-    [course.id, navigate]
+    [course.id, fetchCourses, navigate]
   );
 
   return (

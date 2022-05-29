@@ -12,6 +12,7 @@ import {
 type CourseListContextProps = {
   courses: ICourse[];
   setCourses: React.Dispatch<React.SetStateAction<ICourse[]>>;
+  fetchCourses: () => Promise<void>;
   loading: boolean;
 };
 
@@ -24,6 +25,7 @@ export enum PublishStatus {
 const defaultValue: CourseListContextProps = {
   courses: [],
   setCourses: () => {},
+  fetchCourses: async () => {},
   loading: false,
 };
 
@@ -70,7 +72,9 @@ export const CourseListProvider = ({
   }, [fetchUserCourses]);
 
   return (
-    <CourseListContext.Provider value={{ courses, loading, setCourses }}>
+    <CourseListContext.Provider
+      value={{ courses, loading, setCourses, fetchCourses: fetchUserCourses }}
+    >
       {children}
     </CourseListContext.Provider>
   );

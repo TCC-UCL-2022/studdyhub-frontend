@@ -57,4 +57,29 @@ export const CourseService = {
       };
     }
   },
+
+  updateCoursePublishStatus: async (
+    courseId: string,
+    published: boolean
+  ): Promise<ICourse | null> => {
+    try {
+      const { data } = await httpClient.patch<ICourse>(`/courses/${courseId}`, {
+        published,
+      });
+
+      return data;
+    } catch (error) {
+      return null;
+    }
+  },
+
+  deleteCourse: async (courseId: string): Promise<boolean> => {
+    try {
+      await httpClient.delete(`/courses/${courseId}`);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  },
 };
