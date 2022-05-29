@@ -1,8 +1,8 @@
-import { ActivityList, ActivityListProvider } from "@/features/my-courses";
+import { ActivityList, ActivityListProvider } from "@/features/my-activities";
 import { Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import { RiArrowLeftFill, RiArrowRightFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { useCreateCourseContext } from "./create-course.context";
+import { useCreateCourseContext } from "../create-course.context";
 
 export const CreateActivityStep = (): JSX.Element => {
   const { setStep, course } = useCreateCourseContext();

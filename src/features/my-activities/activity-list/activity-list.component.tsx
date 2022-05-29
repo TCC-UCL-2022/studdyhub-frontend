@@ -1,6 +1,6 @@
 import { Button, List, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { RiAddFill } from "react-icons/ri";
-import { CreateActivityModal } from "../create-course-activity";
+import { CreateActivityModal } from "../create-activity";
 import { ActivityItem } from "./activity-item";
 import { useActivityListContext } from "./activity-list.context";
 

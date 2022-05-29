@@ -12,7 +12,7 @@ import {
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { RiArrowRightFill } from "react-icons/ri";
-import { useCreateCourseContext } from "./create-course.context";
+import { useCreateCourseContext } from "../create-course.context";
 
 export const CreateCourseStep = (): JSX.Element | null => {
   const { user } = useAuthenticationContext();

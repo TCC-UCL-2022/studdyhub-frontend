@@ -2,12 +2,11 @@ import { ProgressIndicator, Step } from "@/features/ui/navigation";
 import { ICourse } from "@/services/courses";
 import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
-import { CreateActivityStep } from "./create-activity-step";
-import { CreateCourseStep } from "./create-course-step";
 import {
   CreateCourseContext,
   CreateCourseSteps,
 } from "./create-course.context";
+import { CreateActivityStep, CreateCourseStep } from "./steps";
 
 const steps = [
   {

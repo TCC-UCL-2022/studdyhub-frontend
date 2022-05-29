@@ -1,6 +1,6 @@
 import { ICourse } from "@/services/courses";
 import { Flex, Heading, useColorModeValue } from "@chakra-ui/react";
-import { StepsContainer } from "./steps-container";
+import { StepsContainer } from "./create-course-steps";
 
 type CreateCourseProps = {
   courseToEdit?: ICourse;

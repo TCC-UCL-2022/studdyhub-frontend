@@ -1,1 +1,1 @@
-export * from "./create-course";
+export * from "./create-course.component";

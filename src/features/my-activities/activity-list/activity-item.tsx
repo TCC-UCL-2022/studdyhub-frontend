@@ -17,7 +17,7 @@ import {
   RiDeleteBin2Fill,
   RiFileTextFill,
 } from "react-icons/ri";
-import { ActivityDetailsModal } from "../activity-details-modal";
+import { ActivityDetailsModal } from "../activity-details";
 
 type ActivityItemProps = {
   activity: IActivity;
