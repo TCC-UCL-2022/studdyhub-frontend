@@ -18,7 +18,6 @@ export const RadioButton = ({
     <Button
       {...props}
       key={`button-group-field-option-${value}`}
-      w="24"
       onClick={() => setValue(value)}
       {...(isSelected && {
         colorScheme: "blue",

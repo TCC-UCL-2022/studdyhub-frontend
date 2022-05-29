@@ -1,7 +1,7 @@
 import { ButtonGroup, ButtonGroupProps, useRadioGroup } from "@chakra-ui/react";
 import { RadioButtonContext, StringOrNumber } from "./radio-button.context";
 
-export type RadioButtonGroupProps = ButtonGroupProps & {
+export type RadioButtonGroupProps = Omit<ButtonGroupProps, "onChange"> & {
   value: StringOrNumber;
   onChange: (value: StringOrNumber) => void;
 };
