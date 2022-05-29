@@ -14,16 +14,11 @@ interface IRoute {
 
 export const authenticatedRoutes: IRoute[] = [
   {
-    path: "/",
-    component: <HomePage />,
-    index: true,
-  },
-  {
     path: "/onboarding",
     component: <OnboardingPage />,
   },
   {
-    path: "/courses/create",
+    path: "/my-courses/create",
     component: <CreateCoursePage />,
   },
 ];
@@ -32,6 +27,11 @@ export const routes: IRoute[] = [
   {
     path: "/login",
     component: <LoginPage />,
+  },
+  {
+    path: "/",
+    component: <HomePage />,
+    index: true,
   },
   {
     path: "*",

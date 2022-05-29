@@ -23,7 +23,7 @@ type AuthenticationContextProps = {
 
 const initialContext: AuthenticationContextProps = {
   user: null,
-  loading: true,
+  loading: false,
   fetchUser: async () => {},
   handleUserFirstAccess: async () => {},
   signOut: () => {},
@@ -43,23 +43,20 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren<{}>) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const checkCognitoAuthentication = useCallback(() => {
-    if (!cognitoUser) {
-      if (location.pathname !== "/login") {
-        navigate(`/login?redirect=${location.pathname}`);
-      }
-    } else {
+  const fetchUser = useCallback(async () => {
+    if (cognitoUser && !context.user) {
+      setContext((prev) => ({
+        ...prev,
+        loading: true,
+      }));
+
       const session = cognitoUser.getSignInUserSession();
       const token = session?.getIdToken().getJwtToken();
 
       if (token) {
         setToken(token);
       }
-    }
-  }, [cognitoUser, location.pathname, navigate]);
 
-  const fetchUser = useCallback(async () => {
-    if (cognitoUser && !context.user) {
       const user = await UserService.getUser(cognitoUser.attributes?.sub || "");
 
       if (!user) {
@@ -76,10 +73,6 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren<{}>) => {
       }));
     }
   }, [cognitoUser, context.user, location.pathname, navigate]);
-
-  useEffect(() => {
-    checkCognitoAuthentication();
-  }, [checkCognitoAuthentication]);
 
   useEffect(() => {
     fetchUser();

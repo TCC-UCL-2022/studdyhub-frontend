@@ -59,7 +59,7 @@ export const Header = ({ hideOptions }: HeaderProps): JSX.Element => {
                 <IconButton
                   as={Link}
                   aria-label="Adicionar curso"
-                  to="/courses/create"
+                  to="/my-courses/create"
                   icon={<RiVideoAddFill />}
                   size={iconsSize}
                   colorScheme="blue"
