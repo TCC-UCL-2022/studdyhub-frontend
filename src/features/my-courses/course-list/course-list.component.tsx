@@ -1,32 +1,27 @@
-import {
-  Flex,
-  Heading,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { CourseListItem } from "./course-list-item";
-import { CourseListProvider } from "./course-list.context";
+import { RadioButton, RadioButtonGroup } from "@/features/ui/forms";
+import { Flex, Heading, useColorModeValue } from "@chakra-ui/react";
+import { useState } from "react";
+import { CourseListContainer } from "./course-list-container";
+import { CourseListProvider, PublishStatus } from "./course-list.context";
 
-const tabs = [
+const options = [
   {
     label: "Todos",
-    published: undefined,
+    value: PublishStatus.All,
   },
   {
     label: "Publicados",
-    published: true,
+    value: PublishStatus.Published,
   },
   {
     label: "Não Publicados",
-    published: false,
+    value: PublishStatus.Unpublished,
   },
 ];
 
 export const CourseList = (): JSX.Element => {
+  const [published, setPublished] = useState(PublishStatus.All);
+
   return (
     <Flex
       w="100%"
@@ -42,30 +37,22 @@ export const CourseList = (): JSX.Element => {
     >
       <Heading size="md">Meus Cursos</Heading>
 
-      <Tabs
-        variant="solid-rounded"
-        colorScheme="blue"
-        defaultIndex={0}
-        isLazy
-        lazyBehavior="unmount"
-        mt="5"
-        flexGrow="1"
+      <RadioButtonGroup
+        mt="4"
+        value={published}
+        onChange={setPublished as any}
+        isAttached={false}
       >
-        <TabList>
-          {tabs.map(({ label }) => (
-            <Tab key={`course-list-tab-${label}`}>{label}</Tab>
-          ))}
-        </TabList>
-        <TabPanels>
-          {tabs.map(({ label, published }) => (
-            <TabPanel key={`course-list-tab-panel-${label}`}>
-              <CourseListProvider published={published}>
-                <CourseListItem />
-              </CourseListProvider>
-            </TabPanel>
-          ))}
-        </TabPanels>
-      </Tabs>
+        {options.map(({ label, value }) => (
+          <RadioButton borderRadius="full" value={value}>
+            {label}
+          </RadioButton>
+        ))}
+      </RadioButtonGroup>
+
+      <CourseListProvider published={published}>
+        <CourseListContainer mt="4" flexGrow="1" />
+      </CourseListProvider>
     </Flex>
   );
 };

@@ -15,6 +15,12 @@ type CourseListContextProps = {
   loading: boolean;
 };
 
+export enum PublishStatus {
+  All = "all",
+  Published = "published",
+  Unpublished = "unpublished",
+}
+
 const defaultValue: CourseListContextProps = {
   courses: [],
   setCourses: () => {},
@@ -25,12 +31,22 @@ export const CourseListContext =
   createContext<CourseListContextProps>(defaultValue);
 
 type CourseListContextProviderProps = {
-  published?: boolean;
+  published?: PublishStatus;
+};
+
+const mapPublishStatusToQuery = (published: PublishStatus) => {
+  const mapKeys = {
+    [PublishStatus.All]: undefined,
+    [PublishStatus.Published]: true,
+    [PublishStatus.Unpublished]: false,
+  };
+
+  return mapKeys[published];
 };
 
 export const CourseListProvider = ({
   children,
-  published,
+  published = PublishStatus.All,
 }: PropsWithChildren<CourseListContextProviderProps>) => {
   const { user } = useAuthenticationContext();
   const [courses, setCourses] = useState<ICourse[]>([]);
@@ -41,7 +57,7 @@ export const CourseListProvider = ({
       setLoading(true);
       const fetchedCourses = await CourseService.getCourseByUserId(
         user.id,
-        published
+        mapPublishStatusToQuery(published)
       );
 
       setCourses(fetchedCourses.items);
