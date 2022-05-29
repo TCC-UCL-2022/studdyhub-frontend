@@ -1,6 +1,7 @@
 import {
   CreateCoursePage,
   HomePage,
+  ListCoursesPage,
   LoginPage,
   NotFoundPage,
   OnboardingPage,
@@ -20,6 +21,10 @@ export const authenticatedRoutes: IRoute[] = [
   {
     path: "/my-courses/create",
     component: <CreateCoursePage />,
+  },
+  {
+    path: "/my-courses",
+    component: <ListCoursesPage />,
   },
 ];
 
