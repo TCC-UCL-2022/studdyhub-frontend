@@ -11,7 +11,7 @@ export const CourseDetails = ({
 }: CourseDetailsProps): JSX.Element => {
   return (
     <Tabs mt="4" variant="solid-rounded" defaultIndex={0} isLazy>
-      <TabList>
+      <TabList justifyContent="center">
         <Tab>Informações</Tab>
         <Tab>Atividades</Tab>
       </TabList>

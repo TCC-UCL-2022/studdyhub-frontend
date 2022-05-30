@@ -7,7 +7,7 @@ export const CourseDetailsPage = (): JSX.Element => {
 
   return (
     <AppLayout title="Detalhes do curso">
-      <MyCoursesLayout subTitle="Detalhes do curso">
+      <MyCoursesLayout subTitle="Detalhes do curso" backButton>
         {!courseId && <div>CourseId not found</div>}
         {courseId && <CourseDetails courseId={courseId} />}
       </MyCoursesLayout>

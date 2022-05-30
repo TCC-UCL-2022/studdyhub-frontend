@@ -1,14 +1,31 @@
-import { Flex, Heading, useColorModeValue } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  HStack,
+  Icon,
+  IconButton,
+  Tooltip,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
+import { RiArrowLeftLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 type MyCoursesLayoutProps = {
   subTitle: string;
+  backButton?: boolean;
+  backUrl?: string;
 };
 
 export const MyCoursesLayout = ({
   children,
   subTitle,
+  backButton,
+
+  backUrl,
 }: PropsWithChildren<MyCoursesLayoutProps>): JSX.Element => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       w="100%"
@@ -22,7 +39,19 @@ export const MyCoursesLayout = ({
       borderRadius="lg"
       boxShadow="md"
     >
-      <Heading size="md">{subTitle}</Heading>
+      <HStack>
+        {backButton && (
+          <Tooltip label="Voltar" placement="top">
+            <IconButton
+              aria-label="Voltar"
+              icon={<Icon as={RiArrowLeftLine} fontSize="24" />}
+              variant="ghost"
+              onClick={() => navigate(backUrl || (-1 as any))}
+            />
+          </Tooltip>
+        )}
+        <Heading size="md">{subTitle}</Heading>
+      </HStack>
 
       {children}
     </Flex>
