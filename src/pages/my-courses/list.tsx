@@ -1,10 +1,12 @@
 import { CourseList } from "@/features/my-courses";
-import { AppLayout } from "@/features/ui/layout";
+import { AppLayout, MyCoursesLayout } from "@/features/ui/layout";
 
 export const ListCoursesPage = (): JSX.Element => {
   return (
     <AppLayout title="Meus cursos">
-      <CourseList />
+      <MyCoursesLayout subTitle="Meus cursos">
+        <CourseList />
+      </MyCoursesLayout>
     </AppLayout>
   );
 };
