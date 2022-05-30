@@ -1,5 +1,6 @@
 import { useAuthenticationContext } from "@/features/authentication";
 import { CourseService, ICourse } from "@/services/courses";
+import { useDisclosure } from "@chakra-ui/react";
 import {
   createContext,
   PropsWithChildren,
@@ -8,11 +9,13 @@ import {
   useEffect,
   useState,
 } from "react";
+import { EditCourseForm, EditCourseModal } from "../edit-course";
 
 type CourseListContextProps = {
   courses: ICourse[];
   setCourses: React.Dispatch<React.SetStateAction<ICourse[]>>;
   fetchCourses: () => Promise<void>;
+  editCourse: (course: ICourse) => void;
   loading: boolean;
 };
 
@@ -26,6 +29,7 @@ const defaultValue: CourseListContextProps = {
   courses: [],
   setCourses: () => {},
   fetchCourses: async () => {},
+  editCourse: () => {},
   loading: false,
 };
 
@@ -53,6 +57,7 @@ export const CourseListProvider = ({
   const { user } = useAuthenticationContext();
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [loading, setLoading] = useState(false);
+  const [courseToEdit, setCourseToEdit] = useState<ICourse | undefined>();
 
   const fetchUserCourses = useCallback(async () => {
     if (user?.id) {
@@ -71,11 +76,42 @@ export const CourseListProvider = ({
     fetchUserCourses();
   }, [fetchUserCourses]);
 
+  const { isOpen, onOpen, onClose } = useDisclosure({});
+
+  const editCourse = useCallback(
+    (course: ICourse) => {
+      setCourseToEdit(course);
+      onOpen();
+    },
+    [onOpen]
+  );
+
+  const onCourseUpdated = useCallback(async () => {
+    fetchUserCourses();
+    onClose();
+  }, [fetchUserCourses, onClose]);
+
   return (
     <CourseListContext.Provider
-      value={{ courses, loading, setCourses, fetchCourses: fetchUserCourses }}
+      value={{
+        courses,
+        loading,
+        setCourses,
+        fetchCourses: fetchUserCourses,
+        editCourse,
+      }}
     >
       {children}
+
+      <EditCourseModal isOpen={isOpen} onClose={onClose}>
+        {courseToEdit && (
+          <EditCourseForm
+            course={courseToEdit}
+            onUpdated={onCourseUpdated}
+            onCancel={onClose}
+          />
+        )}
+      </EditCourseModal>
     </CourseListContext.Provider>
   );
 };

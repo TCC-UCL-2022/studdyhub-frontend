@@ -76,7 +76,7 @@ export const CourseListItem = ({
   course,
 }: CourseListItemProps): JSX.Element => {
   const navigate = useNavigate();
-  const { fetchCourses } = useCourseListContext();
+  const { fetchCourses, editCourse } = useCourseListContext();
   const iconColor = useColorModeValue("white", "black");
 
   const mapAction = useMemo(
@@ -85,7 +85,9 @@ export const CourseListItem = ({
         await CourseService.deleteCourse(course.id);
         await fetchCourses();
       },
-      [ItemAction.EDIT]: () => {},
+      [ItemAction.EDIT]: () => {
+        editCourse(course);
+      },
       [ItemAction.PUBLISH]: async () => {
         await CourseService.updateCoursePublishStatus(course.id, true);
         await fetchCourses();
@@ -96,7 +98,7 @@ export const CourseListItem = ({
       },
       [ItemAction.VIEW]: () => navigate(`/my-courses/${course.id}`),
     }),
-    [course.id, fetchCourses, navigate]
+    [course, editCourse, fetchCourses, navigate]
   );
 
   return (
