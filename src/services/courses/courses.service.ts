@@ -51,6 +51,7 @@ export const CourseService = {
       this.count = 0;
       return data;
     } catch (error) {
+      this.count = 0;
       return {
         items: [],
         count: 0,
