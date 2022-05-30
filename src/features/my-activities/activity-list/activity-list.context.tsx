@@ -12,12 +12,14 @@ type ActivityListContextProps = {
   activities: IActivity[];
   setActivities: React.Dispatch<React.SetStateAction<IActivity[]>>;
   courseId: string;
+  loading: boolean;
 };
 
 const defaultValue: ActivityListContextProps = {
   activities: [],
   setActivities: () => {},
   courseId: "",
+  loading: false,
 };
 
 export const ActivityListContext =
@@ -32,13 +34,17 @@ export const ActivityListProvider = ({
   children,
 }: PropsWithChildren<ActivityListProviderProps>) => {
   const [activities, setActivities] = useState<IActivity[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchActivities = useCallback(async () => {
+    setLoading(true);
+
     const fetchedActivities = await ActivitiesService.getCourseActivities(
       courseId
     );
 
     setActivities(fetchedActivities);
+    setLoading(false);
   }, [courseId]);
 
   useEffect(() => {
@@ -47,7 +53,7 @@ export const ActivityListProvider = ({
 
   return (
     <ActivityListContext.Provider
-      value={{ activities, courseId, setActivities }}
+      value={{ activities, courseId, loading, setActivities }}
     >
       {children}
     </ActivityListContext.Provider>

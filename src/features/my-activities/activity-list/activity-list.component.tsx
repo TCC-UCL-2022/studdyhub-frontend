@@ -1,16 +1,31 @@
-import { Button, List, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  List,
+  Spinner,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { RiAddFill } from "react-icons/ri";
 import { CreateActivityModal } from "../create-activity";
 import { ActivityItem } from "./activity-item";
 import { useActivityListContext } from "./activity-list.context";
 
 export const ActivityList = (): JSX.Element => {
-  const { activities } = useActivityListContext();
+  const { activities, loading } = useActivityListContext();
   const { onOpen, ...modalPros } = useDisclosure();
 
   return (
     <VStack spacing="5" w="100%" flexGrow="1">
-      {activities.length === 0 && <Text>Nenhuma atividade cadastrada</Text>}
+      {loading && (
+        <Center h="100%" w="100%">
+          <Spinner colorScheme="blue" />
+        </Center>
+      )}
+      {!loading && activities.length === 0 && (
+        <Text>Nenhuma atividade cadastrada</Text>
+      )}
 
       <List spacing={3} w="100%" maxW="lg">
         {activities.map((activity) => (

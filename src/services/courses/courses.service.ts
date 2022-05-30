@@ -83,4 +83,21 @@ export const CourseService = {
       return false;
     }
   },
+
+  getCourseById: async function (courseId: string): Promise<ICourse | null> {
+    try {
+      if (this.count) {
+        throw new Error("This function was called more than once");
+      }
+
+      this.count++;
+      const { data } = await httpClient.get<ICourse>(`/courses/${courseId}`);
+
+      this.count = 0;
+      return data;
+    } catch (error) {
+      this.count = 0;
+      return null;
+    }
+  },
 };

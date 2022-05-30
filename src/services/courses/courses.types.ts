@@ -1,5 +1,6 @@
-export interface ICourse {
-  id: string;
+import { BaseEntity } from "@/types";
+
+export interface ICourse extends BaseEntity {
   title: string;
   description: string;
   published: boolean;
