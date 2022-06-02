@@ -6,6 +6,7 @@ import {
   LoginPage,
   NotFoundPage,
   OnboardingPage,
+  SearchPage,
 } from "@/pages";
 
 interface IRoute {
@@ -42,6 +43,10 @@ export const routes: IRoute[] = [
     path: "/",
     component: <HomePage />,
     index: true,
+  },
+  {
+    path: "/courses",
+    component: <SearchPage />,
   },
   {
     path: "*",
