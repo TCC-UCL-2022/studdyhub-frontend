@@ -7,6 +7,7 @@ import {
   InputRightElement,
   Kbd,
   ThemingProps,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -30,6 +31,8 @@ export const SearchBar = ({
   const [searchParams] = useSearchParams();
 
   const unstyled = variant === "unstyled";
+  const bgColor = useColorModeValue("white", "whiteAlpha.50");
+  const hoverBgColor = useColorModeValue("gray.50", "whiteAlpha.100");
 
   const { handleSubmit, register } = useForm<SearchParams>({
     defaultValues: {
@@ -53,6 +56,8 @@ export const SearchBar = ({
         display="flex"
         alignItems="center"
         justifyContent="center"
+        borderRadius="lg"
+        bgColor={unstyled ? "" : bgColor}
       >
         <InputLeftElement
           h="100%"
@@ -66,8 +71,13 @@ export const SearchBar = ({
           placeholder="Pesquisar curso"
           minH="16"
           fontSize="lg"
+          borderRadius="lg"
           pl={unstyled ? "8" : "14"}
           pr={unstyled ? "20" : "28"}
+          bgColor={unstyled ? "" : bgColor}
+          _hover={{
+            bgColor: unstyled ? "" : hoverBgColor,
+          }}
         />
         <InputRightElement
           h="100%"

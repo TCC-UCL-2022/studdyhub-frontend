@@ -106,20 +106,27 @@ export const CourseService = {
     }
   },
 
-  getAllCourses: async function (
-    params: GetCoursesRequestDto
-  ): Promise<GetCoursesResponseDto> {
-    try {
-      const { data } = await httpClient.get<GetCoursesResponseDto>("/courses", {
-        params,
-      });
+  getAllCourses: async function ({
+    loadUser = true,
+    orderBy,
+    orderDirection,
+    published = true,
+    query,
+    skip = 0,
+    take = 10,
+  }: GetCoursesRequestDto): Promise<GetCoursesResponseDto> {
+    const { data } = await httpClient.get<GetCoursesResponseDto>("/courses", {
+      params: {
+        loadUser,
+        orderBy,
+        orderDirection,
+        published,
+        query,
+        skip,
+        take,
+      },
+    });
 
-      return data;
-    } catch (error) {
-      return {
-        items: [],
-        count: 0,
-      };
-    }
+    return data;
   },
 };
