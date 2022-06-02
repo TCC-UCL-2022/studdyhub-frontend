@@ -11,7 +11,7 @@ export const SearchBarModal = ({
   onClose,
 }: SearchBarModalProps): JSX.Element => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent>
         <ModalBody>

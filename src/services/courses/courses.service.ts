@@ -1,6 +1,11 @@
 import { httpClient } from "@/lib";
 import { ICourse } from "./courses.types";
-import { CreateCourseDto, GetCoursesResponseDto, UpdateCourseDto } from "./dto";
+import {
+  CreateCourseDto,
+  GetCoursesRequestDto,
+  GetCoursesResponseDto,
+  UpdateCourseDto,
+} from "./dto";
 
 export const CourseService = {
   count: 0,
@@ -98,6 +103,23 @@ export const CourseService = {
     } catch (error) {
       this.count = 0;
       return null;
+    }
+  },
+
+  getAllCourses: async function (
+    params: GetCoursesRequestDto
+  ): Promise<GetCoursesResponseDto> {
+    try {
+      const { data } = await httpClient.get<GetCoursesResponseDto>("/courses", {
+        params,
+      });
+
+      return data;
+    } catch (error) {
+      return {
+        items: [],
+        count: 0,
+      };
     }
   },
 };
