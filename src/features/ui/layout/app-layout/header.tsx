@@ -1,4 +1,5 @@
 import { ProfileMenu } from "@/features/account";
+import { SearchBarModalButton } from "@/features/search-courses";
 import {
   Box,
   Flex,
@@ -9,7 +10,12 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { RiMoonFill, RiSunFill, RiVideoAddFill } from "react-icons/ri";
+import {
+  RiMoonFill,
+  RiSearch2Line,
+  RiSunFill,
+  RiVideoAddFill,
+} from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { Logo } from "./logo";
 
@@ -47,6 +53,14 @@ export const Header = ({ hideOptions }: HeaderProps): JSX.Element => {
 
           {!hideOptions && (
             <HStack spacing={["2", "4"]} ml="auto">
+              <Tooltip label="Pesquisar curso">
+                <SearchBarModalButton
+                  aria-label="Pesquisar curso"
+                  icon={<RiSearch2Line />}
+                  size={iconsSize}
+                />
+              </Tooltip>
+
               <Tooltip label="Trocar tema">
                 <IconButton
                   aria-label="Trocar tema"
@@ -55,6 +69,7 @@ export const Header = ({ hideOptions }: HeaderProps): JSX.Element => {
                   size={iconsSize}
                 />
               </Tooltip>
+
               <Tooltip label="Adicionar curso">
                 <IconButton
                   as={Link}
