@@ -1,5 +1,6 @@
 import {
   CourseDetailsPage,
+  CourseInfoPage,
   CreateCoursePage,
   HomePage,
   ListCoursesPage,
@@ -47,6 +48,10 @@ export const routes: IRoute[] = [
   {
     path: "/courses",
     component: <SearchPage />,
+  },
+  {
+    path: "/courses/:courseId",
+    component: <CourseInfoPage />,
   },
   {
     path: "*",

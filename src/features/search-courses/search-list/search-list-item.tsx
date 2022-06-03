@@ -9,6 +9,7 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 type SearchListItemProps = {
   course: ICourse;
@@ -59,6 +60,8 @@ export const SearchListItem = ({
         mt="4"
         size="lg"
         colorScheme="blue"
+        as={Link}
+        to={`/courses/${course.id}`}
       >
         Acessar curso
       </Button>

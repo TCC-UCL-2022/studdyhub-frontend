@@ -1,6 +1,5 @@
 import { CourseService } from "@/services/courses";
 import { Flex, Heading, HStack, VStack } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import { SearchBar } from "../search-bar";
@@ -22,10 +21,6 @@ export const SearchContainer = (): JSX.Element => {
       refetchOnReconnect: false,
     }
   );
-
-  useEffect(() => {
-    console.log(searchParams.get("search"));
-  }, [searchParams]);
 
   return (
     <Flex w="100%">
