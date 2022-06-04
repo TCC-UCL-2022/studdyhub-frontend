@@ -8,6 +8,7 @@ import {
   NotFoundPage,
   OnboardingPage,
   SearchPage,
+  WatchCoursePage,
 } from "@/pages";
 
 interface IRoute {
@@ -32,6 +33,14 @@ export const authenticatedRoutes: IRoute[] = [
   {
     path: "/my-courses/:courseId",
     component: <MyCourseDetailsPage />,
+  },
+  {
+    path: "/courses/watch/:courseId",
+    component: <WatchCoursePage />,
+  },
+  {
+    path: "/courses/watch/:courseId/:activityId",
+    component: <WatchCoursePage />,
   },
 ];
 
