@@ -82,7 +82,7 @@ export const StepContainer = styled(Flex)`
     }
 
     &:last-child:after,
-    &:first-child:before {
+    &:first-of-type:before {
       background-color: transparent;
     }
   }

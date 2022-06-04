@@ -1,4 +1,5 @@
 import { httpClient } from "@/lib";
+import { CreateUserDto } from "./dto";
 import { IUser } from "./user.types";
 
 export const UserService = {
@@ -12,7 +13,7 @@ export const UserService = {
     }
   },
 
-  createUser: async (user: Omit<IUser, "id">): Promise<IUser | null> => {
+  createUser: async (user: CreateUserDto): Promise<IUser | null> => {
     try {
       const { data } = await httpClient.post<IUser>("/users", user);
 

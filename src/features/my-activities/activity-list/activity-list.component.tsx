@@ -1,8 +1,11 @@
+import { Roles } from "@/enums";
+import { useAuthenticationContext } from "@/features/authentication";
 import {
   Button,
   Center,
   List,
   Spinner,
+  StackProps,
   Text,
   useDisclosure,
   VStack,
@@ -12,12 +15,15 @@ import { CreateActivityModal } from "../create-activity";
 import { ActivityItem } from "./activity-item";
 import { useActivityListContext } from "./activity-list.context";
 
-export const ActivityList = (): JSX.Element => {
+export const ActivityList = (props: StackProps): JSX.Element => {
   const { activities, loading } = useActivityListContext();
   const { onOpen, ...modalPros } = useDisclosure();
+  const { user } = useAuthenticationContext();
+
+  const canAdd = user?.role === Roles.TEACHER;
 
   return (
-    <VStack spacing="5" w="100%" flexGrow="1">
+    <VStack spacing="5" w="100%" flexGrow="1" {...props}>
       {loading && (
         <Center h="100%" w="100%">
           <Spinner colorScheme="blue" />
@@ -36,16 +42,18 @@ export const ActivityList = (): JSX.Element => {
         ))}
       </List>
 
-      <Button
-        colorScheme="blue"
-        size="sm"
-        rightIcon={<RiAddFill />}
-        onClick={onOpen}
-      >
-        Adicionar atividade
-      </Button>
+      {canAdd && (
+        <Button
+          colorScheme="blue"
+          size="sm"
+          rightIcon={<RiAddFill />}
+          onClick={onOpen}
+        >
+          Adicionar atividade
+        </Button>
+      )}
 
-      <CreateActivityModal modalProps={modalPros} />
+      {canAdd && <CreateActivityModal modalProps={modalPros} />}
     </VStack>
   );
 };

@@ -21,7 +21,6 @@ export const MyCoursesLayout = ({
   children,
   subTitle,
   backButton,
-
   backUrl,
 }: PropsWithChildren<MyCoursesLayoutProps>): JSX.Element => {
   const navigate = useNavigate();

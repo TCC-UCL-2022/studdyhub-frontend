@@ -5,5 +5,5 @@ export interface ICourse extends BaseEntity {
   title: string;
   description: string;
   published: boolean;
-  user?: IUser;
+  user: IUser;
 }

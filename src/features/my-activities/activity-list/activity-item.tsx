@@ -1,3 +1,5 @@
+import { Roles } from "@/enums";
+import { useAuthenticationContext } from "@/features/authentication";
 import { IActivity } from "@/services/activities";
 import {
   Flex,
@@ -28,24 +30,28 @@ enum ItemAction {
   DETAILS = "details",
 }
 
-const options = [
+const getOptions = (canDelete: boolean) => [
   {
     icon: RiFileTextFill,
     label: "Detalhes da atividade",
     colorScheme: "blue",
     action: ItemAction.DETAILS,
+    show: true,
   },
   {
     icon: RiDeleteBin2Fill,
     label: "Excluir atividade",
     colorScheme: "red",
     action: ItemAction.DELETE,
+    show: canDelete,
   },
 ];
 
 export const ActivityItem = ({ activity }: ActivityItemProps): JSX.Element => {
   const { onOpen, ...modalProps } = useDisclosure();
+  const { user } = useAuthenticationContext();
   const iconColor = useColorModeValue("white", "black");
+  const canDelete = user?.role === Roles.TEACHER;
 
   const mapAction = useMemo(
     () => ({
@@ -79,17 +85,20 @@ export const ActivityItem = ({ activity }: ActivityItemProps): JSX.Element => {
           </Flex>
 
           <HStack>
-            {options.map(({ colorScheme, icon, label, action }) => (
-              <Tooltip label={label} key={`activity-item-options-${label}`}>
-                <IconButton
-                  aria-label={label}
-                  icon={<Icon color={iconColor} as={icon} />}
-                  size="sm"
-                  colorScheme={colorScheme}
-                  onClick={mapAction[action]}
-                />
-              </Tooltip>
-            ))}
+            {getOptions(canDelete).map(
+              ({ colorScheme, icon, label, action, show }) =>
+                show && (
+                  <Tooltip label={label} key={`activity-item-options-${label}`}>
+                    <IconButton
+                      aria-label={label}
+                      icon={<Icon color={iconColor} as={icon} />}
+                      size="sm"
+                      colorScheme={colorScheme}
+                      onClick={mapAction[action]}
+                    />
+                  </Tooltip>
+                )
+            )}
           </HStack>
         </Flex>
       </ListItem>

@@ -36,7 +36,7 @@ export const CourseService = {
     }
   },
 
-  getCourseByUserId: async function (
+  getCoursesByUserId: async function (
     userId: string,
     published?: boolean
   ): Promise<GetCoursesResponseDto> {

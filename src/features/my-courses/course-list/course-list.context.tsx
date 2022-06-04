@@ -62,7 +62,7 @@ export const CourseListProvider = ({
   const fetchUserCourses = useCallback(async () => {
     if (user?.id) {
       setLoading(true);
-      const fetchedCourses = await CourseService.getCourseByUserId(
+      const fetchedCourses = await CourseService.getCoursesByUserId(
         user.id,
         mapPublishStatusToQuery(published)
       );

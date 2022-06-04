@@ -1,8 +1,8 @@
 import { Roles } from "@/enums";
+import { BaseEntity } from "@/types";
 import { CognitoUserAmplify } from "@aws-amplify/ui-react/node_modules/@aws-amplify/ui";
 
-export interface IUser {
-  id: string;
+export interface IUser extends BaseEntity {
   cognitoId: string;
   name: string;
   email: string;

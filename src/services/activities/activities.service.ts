@@ -11,7 +11,7 @@ export const ActivitiesService = {
       }
 
       this.count++;
-      console.log("getCourseActivities");
+
       const { data } = await httpClient.get<IActivity[]>(
         `/courses/${courseId}/activities`
       );
