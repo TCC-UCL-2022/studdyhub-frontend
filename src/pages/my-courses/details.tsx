@@ -1,15 +1,21 @@
 import { CourseDetails } from "@/features/my-courses";
 import { AppLayout, MyCoursesLayout } from "@/features/ui/layout";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const CourseDetailsPage = (): JSX.Element => {
+export const MyCourseDetailsPage = (): JSX.Element | null => {
   const { courseId } = useParams<{ courseId: string }>();
+  const navigate = useNavigate();
+
+  if (!courseId) {
+    navigate("/");
+
+    return null;
+  }
 
   return (
     <AppLayout title="Detalhes do curso">
       <MyCoursesLayout subTitle="Detalhes do curso" backButton>
-        {!courseId && <div>CourseId not found</div>}
-        {courseId && <CourseDetails courseId={courseId} />}
+        <CourseDetails courseId={courseId} />
       </MyCoursesLayout>
     </AppLayout>
   );

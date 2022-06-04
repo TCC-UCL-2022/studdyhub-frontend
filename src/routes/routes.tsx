@@ -1,10 +1,10 @@
 import {
   CourseDetailsPage,
-  CourseInfoPage,
   CreateCoursePage,
   HomePage,
-  ListCoursesPage,
+  ListMyCoursesPage,
   LoginPage,
+  MyCourseDetailsPage,
   NotFoundPage,
   OnboardingPage,
   SearchPage,
@@ -27,11 +27,11 @@ export const authenticatedRoutes: IRoute[] = [
   },
   {
     path: "/my-courses",
-    component: <ListCoursesPage />,
+    component: <ListMyCoursesPage />,
   },
   {
     path: "/my-courses/:courseId",
-    component: <CourseDetailsPage />,
+    component: <MyCourseDetailsPage />,
   },
 ];
 
@@ -51,7 +51,7 @@ export const routes: IRoute[] = [
   },
   {
     path: "/courses/:courseId",
-    component: <CourseInfoPage />,
+    component: <CourseDetailsPage />,
   },
   {
     path: "*",

@@ -2,7 +2,7 @@ import { CourseDetails } from "@/features/my-courses";
 import { AppLayout, MyCoursesLayout } from "@/features/ui/layout";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const CourseInfoPage = (): JSX.Element | null => {
+export const CourseDetailsPage = (): JSX.Element | null => {
   const { courseId } = useParams<{ courseId: string }>();
   const navigate = useNavigate();
 
