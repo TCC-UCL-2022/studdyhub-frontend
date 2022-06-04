@@ -33,7 +33,7 @@ export const CreateActivityForm = ({
     activityToEdit?.type ?? ActivityType.VIDEO
   );
 
-  const { setActivities, courseId } = useActivityListContext();
+  const { courseId, refetchActivities } = useActivityListContext();
 
   const { register, getValues, setValue, handleSubmit } = useForm({
     defaultValues: activityToEdit,
@@ -47,11 +47,11 @@ export const CreateActivityForm = ({
       );
 
       if (newActivity) {
-        setActivities((prev) => [...prev, newActivity]);
+        await refetchActivities();
         onClose?.();
       }
     },
-    [courseId, onClose, setActivities]
+    [courseId, onClose, refetchActivities]
   );
 
   useEffect(() => {

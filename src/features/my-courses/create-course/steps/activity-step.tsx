@@ -1,4 +1,4 @@
-import { ActivityList, ActivityListProvider } from "@/features/my-activities";
+import { ActivityList } from "@/features/my-activities";
 import { Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import { RiArrowLeftFill, RiArrowRightFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -10,11 +10,7 @@ export const CreateActivityStep = (): JSX.Element => {
 
   return (
     <Flex w="100%" direction="column" h="100%">
-      {course && (
-        <ActivityListProvider courseId={course.id}>
-          <ActivityList />
-        </ActivityListProvider>
-      )}
+      {course && <ActivityList courseId={course.id} />}
 
       <ButtonGroup w="100%" justifyContent="space-between">
         <Button
