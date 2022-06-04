@@ -89,12 +89,18 @@ export const CourseListItem = ({
         editCourse(course);
       },
       [ItemAction.PUBLISH]: async () => {
-        await CourseService.updateCoursePublishStatus(course.id, true);
-        await fetchCourses();
+        const updated = await CourseService.updateCoursePublishStatus(
+          course.id,
+          true
+        );
+        if (updated) await fetchCourses();
       },
       [ItemAction.UNPUBLISH]: async () => {
-        await CourseService.updateCoursePublishStatus(course.id, true);
-        await fetchCourses();
+        const updated = await CourseService.updateCoursePublishStatus(
+          course.id,
+          false
+        );
+        if (updated) await fetchCourses();
       },
       [ItemAction.VIEW]: () => navigate(`/my-courses/${course.id}`),
     }),

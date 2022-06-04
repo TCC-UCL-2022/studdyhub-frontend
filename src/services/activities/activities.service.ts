@@ -4,7 +4,9 @@ import { CreateActivityDto } from "./dto";
 
 export const ActivitiesService = {
   count: 0,
-  getCourseActivities: async function (courseId: string): Promise<IActivity[]> {
+  getCourseActivities: async function (
+    courseId: string
+  ): Promise<IActivity[] | null> {
     try {
       if (this.count) {
         throw new Error("This function was called more than once");
@@ -20,7 +22,7 @@ export const ActivitiesService = {
       return data;
     } catch (error) {
       this.count = 0;
-      return [];
+      return null;
     }
   },
 

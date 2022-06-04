@@ -67,13 +67,13 @@ export const CourseService = {
   updateCoursePublishStatus: async (
     courseId: string,
     published: boolean
-  ): Promise<ICourse | null> => {
+  ): Promise<Boolean | null> => {
     try {
       const { data } = await httpClient.patch<ICourse>(`/courses/${courseId}`, {
         published,
       });
 
-      return data;
+      return !!data;
     } catch (error) {
       return null;
     }
