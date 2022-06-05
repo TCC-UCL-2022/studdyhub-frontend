@@ -1,12 +1,18 @@
 import { ErrorMessage, LoadingState } from "@/features/ui/feedback";
+import { VideoPlayer } from "@/features/ui/media";
 import { CourseService } from "@/services/courses";
-import { Box, Stack, useColorModeValue, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Stack,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { CourseContentBar } from "./course-content-bar";
 import { CourseDescription } from "./course-description";
-import { WatchCourseContext } from "./watch-course.context";
 
 type WatchCourseProps = {
   courseId: string;
@@ -40,32 +46,42 @@ export const WatchCourse = ({
 
       {!isLoading && !data && <ErrorMessage onRetry={refetch as any} />}
 
-      {!isLoading && data && (
-        <WatchCourseContext.Provider
-          value={{ course: data, currentActivityId: activityId }}
-        >
+      {!isLoading && data && activityId && (
+        <>
           <Stack
             spacing="8"
             direction={{ base: "column", lg: "row" }}
             w="100%"
             h="500px"
           >
-            <Box
+            <Center
               w={{ base: "100%", lg: "70%" }}
               h="100%"
               borderRadius="lg"
               boxShadow="md"
               // eslint-disable-next-line react-hooks/rules-of-hooks
               bgColor={useColorModeValue("white", "gray.800")}
-            />
+              position="relative"
+            >
+              <VideoPlayer
+                options={{
+                  sources: [
+                    {
+                      src: "https://studdyhub-video-output.s3.amazonaws.com/a5s6d4a56s4d5a4s654d65asd5as56d4a_1080.mp4",
+                      type: "video/mp4",
+                    },
+                  ],
+                }}
+              />
+            </Center>
 
             <Box h="100%" w={{ base: "100%", lg: "30%" }}>
-              <CourseContentBar />
+              <CourseContentBar course={data} currentActivityId={activityId} />
             </Box>
           </Stack>
 
-          <CourseDescription />
-        </WatchCourseContext.Provider>
+          <CourseDescription course={data} />
+        </>
       )}
     </VStack>
   );

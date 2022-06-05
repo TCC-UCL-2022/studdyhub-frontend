@@ -1,3 +1,4 @@
+import { ICourse } from "@/services/courses";
 import {
   Divider,
   Flex,
@@ -5,11 +6,13 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useWatchCourseContext } from "./watch-course.context";
 
-export const CourseDescription = (): JSX.Element | null => {
-  const { course } = useWatchCourseContext();
-
+type CourseDescriptionProps = {
+  course: ICourse;
+};
+export const CourseDescription = ({
+  course,
+}: CourseDescriptionProps): JSX.Element | null => {
   return (
     <Flex w="100%" direction="column">
       <Heading size="xl">{course?.title}</Heading>

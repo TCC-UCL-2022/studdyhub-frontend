@@ -1,4 +1,5 @@
 import { IActivity } from "@/services/activities";
+import { ICourse } from "@/services/courses";
 import {
   Center,
   Checkbox,
@@ -12,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useWatchCourseContext } from "./watch-course.context";
 
 type ContentItemProps = {
   activity: IActivity;
@@ -44,17 +44,26 @@ const ContentItem = memo(
   )
 );
 
-export const CourseContentBar = (): JSX.Element => {
-  const { course, currentActivityId } = useWatchCourseContext();
+type CourseContentBarProps = {
+  course: ICourse;
+  currentActivityId: string;
+};
+
+export const CourseContentBar = ({
+  course,
+  currentActivityId,
+}: CourseContentBarProps): JSX.Element => {
   const navigate = useNavigate();
 
   console.log(currentActivityId);
 
   const handleActivityClick = useCallback(
     (activityId: string) => {
-      navigate(`/courses/watch/${course?.id}/${activityId}`);
+      if (currentActivityId !== activityId) {
+        navigate(`/courses/watch/${course?.id}/${activityId}`);
+      }
     },
-    [course?.id, navigate]
+    [course?.id, currentActivityId, navigate]
   );
 
   return (
