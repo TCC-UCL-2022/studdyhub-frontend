@@ -10,6 +10,7 @@
     "@emotion/styled": "^11",
     "@fontsource/roboto": "^4.5.7",
     "@rajesh896/video-thumbnails-generator": "^2.3.9",
+    "@silvermine/videojs-quality-selector": "^1.2.5",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
