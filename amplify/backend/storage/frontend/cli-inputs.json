@@ -4,9 +4,6 @@
   "bucketName": "video-uploads",
   "storageAccess": "auth",
   "guestAccess": [],
-  "authAccess": [
-    "CREATE_AND_UPDATE"
-  ],
-  "triggerFunction": "NONE",
+  "authAccess": ["CREATE_AND_UPDATE", "READ", "DELETE"],
   "groupAccess": {}
 }
