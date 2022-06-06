@@ -1,5 +1,7 @@
+import { Storage } from "aws-amplify";
 import { ErrorMessage, LoadingState } from "@/features/ui/feedback";
 import { VideoPlayer } from "@/features/ui/media";
+import { IActivity } from "@/services/activities";
 import { CourseService } from "@/services/courses";
 import {
   Box,
@@ -8,7 +10,7 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { CourseContentBar } from "./course-content-bar";
@@ -19,11 +21,49 @@ type WatchCourseProps = {
   activityId?: string;
 };
 
+type SourceProps = {
+  src: string;
+  type: string;
+  label: string;
+};
+
+const getVideoQualityLabel = (key: string): string => {
+  return key.split("_")[key.split("_").length - 1].replace(".mp4", "p");
+};
+
+const getVideoSourceUrl = async (key: string): Promise<string> => {
+  return await Storage.get(key, {
+    customPrefix: {
+      public: "protected/",
+    },
+    expires: 24 * 60 * 60,
+  });
+};
+
+const listActivitiesSources = async (
+  activity: IActivity
+): Promise<SourceProps[]> => {
+  const sources = await Storage.list(activity.id, {
+    customPrefix: {
+      public: "protected/",
+    },
+  });
+
+  const promises = sources.map(async (source) => ({
+    src: await getVideoSourceUrl(source.key || ""),
+    type: "video/mp4",
+    label: getVideoQualityLabel(source.key || ""),
+  }));
+
+  return Promise.all(promises);
+};
+
 export const WatchCourse = ({
   courseId,
   activityId,
 }: WatchCourseProps): JSX.Element => {
   const navigate = useNavigate();
+  const [sources, setSources] = useState<SourceProps[]>();
 
   const { data, isLoading, refetch } = useQuery(
     `COURSE_DATA_${courseId}`,
@@ -33,6 +73,25 @@ export const WatchCourse = ({
       refetchOnReconnect: false,
     }
   );
+
+  const fetchActivitySources = useCallback(async () => {
+    if (activityId) {
+      const activity = data?.activities.find(
+        (activity) => activity.id === activityId
+      );
+      if (activity) {
+        const sources = await listActivitiesSources(activity);
+
+        sources.sort((a, b) => a.label.localeCompare(b.label));
+
+        setSources(sources);
+      }
+    }
+  }, [data, activityId]);
+
+  useEffect(() => {
+    fetchActivitySources();
+  }, [fetchActivitySources]);
 
   useEffect(() => {
     if (!activityId && data && data.activities.length > 0) {
@@ -65,12 +124,7 @@ export const WatchCourse = ({
             >
               <VideoPlayer
                 options={{
-                  sources: [
-                    {
-                      src: "https://studdyhub-video-output.s3.amazonaws.com/a5s6d4a56s4d5a4s654d65asd5as56d4a_1080.mp4",
-                      type: "video/mp4",
-                    },
-                  ],
+                  sources,
                 }}
               />
             </Center>
