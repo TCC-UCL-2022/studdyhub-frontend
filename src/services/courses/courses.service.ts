@@ -37,8 +37,7 @@ export const CourseService = {
   },
 
   getCoursesByUserId: async function (
-    userId: string,
-    published?: boolean
+    userId: string
   ): Promise<GetCoursesResponseDto> {
     try {
       if (this.count) {
@@ -46,12 +45,9 @@ export const CourseService = {
       }
 
       this.count++;
-      const { data } = await httpClient.get<GetCoursesResponseDto>("/courses", {
-        params: {
-          userId,
-          published,
-        },
-      });
+      const { data } = await httpClient.get<GetCoursesResponseDto>(
+        `/courses/user/${userId}`
+      );
 
       this.count = 0;
       return data;
@@ -108,22 +104,14 @@ export const CourseService = {
 
   getAllCourses: async function ({
     loadUser = true,
-    orderBy,
-    orderDirection,
     published = true,
     query,
-    skip = 0,
-    take = 10,
   }: GetCoursesRequestDto): Promise<GetCoursesResponseDto> {
     const { data } = await httpClient.get<GetCoursesResponseDto>("/courses", {
       params: {
         loadUser,
-        orderBy,
-        orderDirection,
         published,
         query,
-        skip,
-        take,
       },
     });
 

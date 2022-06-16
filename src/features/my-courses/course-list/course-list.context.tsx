@@ -56,25 +56,35 @@ export const CourseListProvider = ({
 }: PropsWithChildren<CourseListContextProviderProps>) => {
   const { user } = useAuthenticationContext();
   const [courses, setCourses] = useState<ICourse[]>([]);
+  const [filteredCourses, setFilteredCourses] = useState<ICourse[]>([]);
   const [loading, setLoading] = useState(false);
   const [courseToEdit, setCourseToEdit] = useState<ICourse | undefined>();
 
   const fetchUserCourses = useCallback(async () => {
     if (user?.id) {
       setLoading(true);
-      const fetchedCourses = await CourseService.getCoursesByUserId(
-        user.id,
-        mapPublishStatusToQuery(published)
-      );
+      const fetchedCourses = await CourseService.getCoursesByUserId(user.id);
 
       setCourses(fetchedCourses.items);
       setLoading(false);
     }
-  }, [published, user]);
+  }, [user]);
+
+  const handleChangePublishStatus = useCallback(() => {
+    const filteredCourses = courses.filter(
+      (course) => course.published === mapPublishStatusToQuery(published)
+    );
+
+    setFilteredCourses(filteredCourses);
+  }, [courses, published]);
 
   useEffect(() => {
     fetchUserCourses();
   }, [fetchUserCourses]);
+
+  useEffect(() => {
+    handleChangePublishStatus();
+  }, [handleChangePublishStatus]);
 
   const { isOpen, onOpen, onClose } = useDisclosure({});
 
@@ -94,7 +104,7 @@ export const CourseListProvider = ({
   return (
     <CourseListContext.Provider
       value={{
-        courses,
+        courses: filteredCourses,
         loading,
         setCourses,
         fetchCourses: fetchUserCourses,

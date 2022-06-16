@@ -36,7 +36,7 @@ export const CreateCourseStep = (): JSX.Element | null => {
 
       const courseCreated = await CourseService.createCourse({
         ...data,
-        userId: user.cognitoId,
+        userId: user.id,
       });
 
       return courseCreated;
