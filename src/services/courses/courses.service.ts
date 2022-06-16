@@ -36,16 +36,14 @@ export const CourseService = {
     }
   },
 
-  getCoursesByUserId: async function (
-    userId: string
-  ): Promise<GetCoursesResponseDto> {
+  getCoursesByUserId: async function (userId: string): Promise<ICourse[]> {
     try {
       if (this.count) {
         throw new Error("This function was called more than once");
       }
 
       this.count++;
-      const { data } = await httpClient.get<GetCoursesResponseDto>(
+      const { data } = await httpClient.get<ICourse[]>(
         `/courses/user/${userId}`
       );
 
@@ -53,10 +51,7 @@ export const CourseService = {
       return data;
     } catch (error) {
       this.count = 0;
-      return {
-        items: [],
-        count: 0,
-      };
+      return [];
     }
   },
 

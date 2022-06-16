@@ -65,7 +65,7 @@ export const CourseListProvider = ({
       setLoading(true);
       const fetchedCourses = await CourseService.getCoursesByUserId(user.id);
 
-      setCourses(fetchedCourses.items);
+      setCourses(fetchedCourses);
       setLoading(false);
     }
   }, [user]);
