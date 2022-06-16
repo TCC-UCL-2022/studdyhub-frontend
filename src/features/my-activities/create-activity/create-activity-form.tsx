@@ -17,6 +17,7 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { RiSave3Fill } from "react-icons/ri";
+import { useMutation } from "react-query";
 import { useActivityListContext } from "../activity-list";
 import { CreateVideoActivity } from "./create-video-activity";
 
@@ -58,8 +59,10 @@ export const CreateActivityForm = ({
     register("content", { required: true });
   }, [register]);
 
+  const { mutate, isLoading } = useMutation(handleSubmit(onSubmit));
+
   return (
-    <VStack as="form" w="100%" spacing="5" onSubmit={handleSubmit(onSubmit)}>
+    <VStack as="form" w="100%" spacing="5" onSubmit={mutate}>
       <FormControl isRequired>
         <FormLabel htmlFor="title">Nome da atividade</FormLabel>
         <Input
@@ -113,6 +116,7 @@ export const CreateActivityForm = ({
         type="submit"
         colorScheme="blue"
         rightIcon={<RiSave3Fill />}
+        isLoading={isLoading}
       >
         Salvar
       </Button>

@@ -12,6 +12,7 @@ import {
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { RiArrowRightFill } from "react-icons/ri";
+import { useMutation } from "react-query";
 import { useCreateCourseContext } from "../create-course.context";
 
 export const CreateCourseStep = (): JSX.Element | null => {
@@ -56,8 +57,10 @@ export const CreateCourseStep = (): JSX.Element | null => {
     [createOrUpdateCourse, setCourse, setStep]
   );
 
+  const { mutate, isLoading } = useMutation(handleSubmit(onSubmit));
+
   return (
-    <VStack as="form" onSubmit={handleSubmit(onSubmit)} w="100%" spacing="5">
+    <VStack as="form" onSubmit={mutate} w="100%" spacing="5">
       <FormControl isRequired>
         <FormLabel htmlFor="title">Nome do curso</FormLabel>
         <Input
@@ -83,6 +86,7 @@ export const CreateCourseStep = (): JSX.Element | null => {
         colorScheme="blue"
         alignSelf="flex-end"
         rightIcon={<RiArrowRightFill />}
+        isLoading={isLoading}
       >
         Próximo
       </Button>
