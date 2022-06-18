@@ -23,3 +23,5 @@ const createHttpCLient = (): AxiosInstance => {
 };
 
 export const httpClient = createHttpCLient();
+
+export const isHttpClientError = axios.isAxiosError;

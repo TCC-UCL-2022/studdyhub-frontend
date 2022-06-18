@@ -1,14 +1,29 @@
-import { httpClient } from "@/lib";
+import { httpClient, isHttpClientError } from "@/lib";
 import { CreateUserDto } from "./dto";
 import { IUser } from "./user.types";
 
 export const UserService = {
-  getUser: async (cognitoId: string): Promise<IUser | null> => {
+  count: 0,
+
+  getUser: async function (cognitoId: string): Promise<IUser | null> {
     try {
+      if (this.count) {
+        throw new Error("This function was called more than once");
+      }
+
+      this.count++;
+
       const { data } = await httpClient.get<IUser>(`/users/${cognitoId}`);
 
+      this.count = 0;
       return data;
     } catch (error) {
+      if (isHttpClientError(error)) {
+        if (error.response?.status !== 404) {
+          this.count = 0;
+        }
+      }
+
       return null;
     }
   },
