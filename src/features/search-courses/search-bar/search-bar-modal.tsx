@@ -1,4 +1,10 @@
-import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { SearchBar } from "./search-bar.component";
 
 type SearchBarModalProps = {
@@ -10,8 +16,15 @@ export const SearchBarModal = ({
   isOpen,
   onClose,
 }: SearchBarModalProps): JSX.Element => {
+  const modalSize = useBreakpointValue({
+    base: "full",
+    sm: "md",
+    md: "lg",
+    lg: "xl",
+  });
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal isOpen={isOpen} onClose={onClose} size={modalSize}>
       <ModalOverlay />
       <ModalContent>
         <ModalBody>

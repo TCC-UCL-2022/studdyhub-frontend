@@ -3,7 +3,6 @@ import { Flex, Heading, HStack, VStack } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import { SearchBar } from "../search-bar";
-import { SearchFilters } from "../search-filters";
 import { SearchList } from "../search-list";
 
 export const SearchContainer = (): JSX.Element => {
@@ -28,10 +27,8 @@ export const SearchContainer = (): JSX.Element => {
         <Heading size="lg">Buscar Cursos</Heading>
 
         <HStack w="100%" spacing="8">
-          <SearchFilters />
-
           <VStack w="100%" spacing="8">
-            <SearchBar />
+            <SearchBar maxW="container.md" />
 
             <SearchList
               courses={data?.items || []}

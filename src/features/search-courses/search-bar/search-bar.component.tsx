@@ -1,5 +1,6 @@
 import {
   Flex,
+  FlexProps,
   Icon,
   Input,
   InputGroup,
@@ -18,7 +19,7 @@ type SearchParams = {
   search: string;
 };
 
-type SearchBarProps = {
+type SearchBarProps = FlexProps & {
   onSearch?: (search: string) => void;
   variant?: ThemingProps<"Input">["variant"];
 };
@@ -26,6 +27,7 @@ type SearchBarProps = {
 export const SearchBar = ({
   onSearch,
   variant = "filled",
+  ...props
 }: SearchBarProps): JSX.Element => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -49,7 +51,13 @@ export const SearchBar = ({
   );
 
   return (
-    <Flex as="form" w="100%" onSubmit={handleSubmit(onSubmit)} direction="row">
+    <Flex
+      as="form"
+      w="100%"
+      onSubmit={handleSubmit(onSubmit)}
+      direction="row"
+      {...props}
+    >
       <InputGroup
         variant={variant}
         boxShadow={unstyled ? "" : "lg"}
@@ -69,7 +77,7 @@ export const SearchBar = ({
           {...register("search")}
           type="text"
           placeholder="Pesquisar curso"
-          minH="16"
+          minH="14"
           fontSize="lg"
           borderRadius="lg"
           pl={unstyled ? "8" : "14"}
