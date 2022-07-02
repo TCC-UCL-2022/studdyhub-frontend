@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "frontendd3786a20": {
+        "studdyhubfrontendc88f95cd": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "HostedUIDomain": "string",
@@ -13,7 +13,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "frontend": {
+        "studdyhubvideos": {
             "BucketName": "string",
             "Region": "string"
         }

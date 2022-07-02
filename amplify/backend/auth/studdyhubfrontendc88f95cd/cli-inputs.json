@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "frontendd3786a20_identitypool_d3786a20",
+    "identityPoolName": "studdyhubfrontendc88f95cd_identitypool_c88f95cd",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "fronted3786a20",
-    "userPoolName": "frontendd3786a20_userpool_d3786a20",
+    "resourceNameTruncated": "studdyc88f95cd",
+    "userPoolName": "studdyhubfrontendc88f95cd_userpool_c88f95cd",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -20,8 +20,7 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email",
-      "name"
+      "email"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
@@ -32,22 +31,21 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "fronted3786a20_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "studdyc88f95cd_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "d3786a20",
-    "resourceName": "frontendd3786a20",
+    "sharedId": "c88f95cd",
+    "resourceName": "studdyhubfrontendc88f95cd",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "defaultSocial",
     "hostedUI": true,
     "usernameAttributes": [
       "email"
     ],
-    "triggers": {},
-    "hostedUIDomainName": "studdyhub",
+    "hostedUIDomainName": "studdyhubfrontendc88f95cd-c88f95cd",
     "authProvidersUserPool": [
       "Google"
     ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
@@ -66,11 +64,6 @@
     },
     "breakCircularDependency": true,
     "dependsOn": [],
-    "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\"}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://app.studdyhub.com/\"],\"LogoutURLs\":[\"https://app.studdyhub.com/\"]}",
-    "parentStack": {
-      "Ref": "AWS::StackId"
-    },
-    "permissions": []
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://app.studdyhub.com/\"],\"LogoutURLs\":[\"https://app.studdyhub.com/\"]}"
   }
 }

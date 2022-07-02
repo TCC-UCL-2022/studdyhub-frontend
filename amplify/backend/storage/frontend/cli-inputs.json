@@ -1,9 +1,0 @@
-{
-  "resourceName": "frontend",
-  "policyUUID": "75644a8e",
-  "bucketName": "video-uploads",
-  "storageAccess": "auth",
-  "guestAccess": [],
-  "authAccess": ["CREATE_AND_UPDATE", "READ", "DELETE"],
-  "groupAccess": {}
-}
