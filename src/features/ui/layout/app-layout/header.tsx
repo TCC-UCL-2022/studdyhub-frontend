@@ -1,4 +1,6 @@
+import { Roles } from "@/enums";
 import { ProfileMenu } from "@/features/account";
+import { useAuthenticationContext } from "@/features/authentication";
 import { SearchBarModalButton } from "@/features/search-courses";
 import {
   Box,
@@ -24,6 +26,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ hideOptions }: HeaderProps): JSX.Element => {
+  const { user } = useAuthenticationContext();
   const { toggleColorMode } = useColorMode();
   const toggleThemeIcon = useColorModeValue(<RiSunFill />, <RiMoonFill />);
   const iconsSize = useBreakpointValue(["sm", "md"]);
@@ -70,16 +73,18 @@ export const Header = ({ hideOptions }: HeaderProps): JSX.Element => {
                 />
               </Tooltip>
 
-              <Tooltip label="Adicionar curso">
-                <IconButton
-                  as={Link}
-                  aria-label="Adicionar curso"
-                  to="/my-courses/create"
-                  icon={<RiVideoAddFill />}
-                  size={iconsSize}
-                  colorScheme="blue"
-                />
-              </Tooltip>
+              {user?.role === Roles.TEACHER && (
+                <Tooltip label="Adicionar curso">
+                  <IconButton
+                    as={Link}
+                    aria-label="Adicionar curso"
+                    to="/my-courses/create"
+                    icon={<RiVideoAddFill />}
+                    size={iconsSize}
+                    colorScheme="blue"
+                  />
+                </Tooltip>
+              )}
 
               <ProfileMenu />
             </HStack>

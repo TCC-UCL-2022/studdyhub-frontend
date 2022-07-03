@@ -75,16 +75,18 @@ export const ProfileMenu = (): JSX.Element => {
       </MenuButton>
       <MenuList>
         <MenuGroup title="Opções">
-          {options.map(({ label, link, icon }) => (
-            <MenuItem
-              key={`app-layout-profile-option-${link}`}
-              as={Link}
-              to={link}
-              icon={icon}
-            >
-              {label}
-            </MenuItem>
-          ))}
+          {options
+            .filter((op) => op.role === user?.role)
+            .map(({ label, link, icon }) => (
+              <MenuItem
+                key={`app-layout-profile-option-${link}`}
+                as={Link}
+                to={link}
+                icon={icon}
+              >
+                {label}
+              </MenuItem>
+            ))}
           <MenuItem icon={<RiLogoutBoxLine />} onClick={signOut}>
             Sair
           </MenuItem>
