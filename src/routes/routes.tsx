@@ -1,7 +1,7 @@
 import {
   CourseDetailsPage,
   CreateCoursePage,
-  HomePage,
+  DashboardPage,
   ListMyCoursesPage,
   LoginPage,
   MyCourseDetailsPage,
@@ -51,7 +51,7 @@ export const routes: IRoute[] = [
   },
   {
     path: "/",
-    component: <HomePage />,
+    component: <DashboardPage />,
     index: true,
   },
   {

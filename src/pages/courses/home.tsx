@@ -1,5 +1,4 @@
 import { AppLayout } from "@/features/ui/layout";
-import "@aws-amplify/ui-react/styles.css";
 
 export const HomePage = (): JSX.Element => {
   return (

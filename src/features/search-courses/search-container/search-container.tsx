@@ -35,6 +35,7 @@ export const SearchContainer = (): JSX.Element => {
               isLoading={isLoading}
               isError={isError}
               onRefresh={refetch as any}
+              maxW="container.md"
             />
           </VStack>
         </HStack>

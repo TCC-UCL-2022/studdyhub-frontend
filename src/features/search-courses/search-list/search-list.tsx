@@ -1,13 +1,20 @@
 import { ICourse } from "@/services/courses";
-import { Button, Center, Spinner, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Spinner,
+  StackProps,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { RiRefreshFill } from "react-icons/ri";
 import { SearchListItem } from "./search-list-item";
 
-type SearchListProps = {
+type SearchListProps = StackProps & {
   courses: ICourse[];
   isLoading: boolean;
   isError: boolean;
-  onRefresh: () => void;
+  onRefresh?: () => void;
 };
 
 export const SearchList = ({
@@ -15,9 +22,10 @@ export const SearchList = ({
   isLoading,
   isError,
   onRefresh,
+  ...props
 }: SearchListProps): JSX.Element => {
   return (
-    <VStack w="100%">
+    <VStack w="100%" {...props}>
       {isLoading && (
         <Center>
           <Spinner colorScheme="blue" />
